@@ -1,0 +1,184 @@
+[
+  {
+    "_id": {
+      "$oid": "640592c7275efeffe2c30165"
+    },
+    "name": "device_ts5000",
+    "connector": "ts5000",
+    "controller": {
+      "ip": "192.168.0.124",
+      "port": 2000
+    },
+    "locked": true,
+    "receiver": {
+      "ip": "192.168.0.124",
+      "port": 2001
+    },
+    "ref": {
+      "TABLE_A": "device_kv8000_dimmfeeder_A",
+      "TABLE_B": "device_kv8000_dimmfeeder_B",
+      "CONVEYOR": "device_kv8000_Conveyor"
+    },
+    "type": "controller"
+  },
+  {
+    "_id": {
+      "$oid": "640977abfdefc19af4b39c38"
+    },
+    "name": "device_kv8000_dimmfeeder_A",
+    "connector": "kv8000",
+    "controller": {
+      "ip": "192.168.0.10",
+      "port": 8501
+    },
+    "locked": true,
+    "receiver": {
+      "ip": "192.168.0.10",
+      "port": 8501
+    },
+    "ref": {
+      "TS5000": "device_ts5000"
+    },
+    "subdevice": "dimmfeeder_A",
+    "type": "controller"
+  },
+  {
+    "_id": {
+      "$oid": "640977abfdefc19af4b39c3a"
+    },
+    "name": "device_kv8000_dimmfeeder_B",
+    "connector": "kv8000",
+    "controller": {
+      "ip": "192.168.0.10",
+      "port": 8501
+    },
+    "locked": true,
+    "receiver": {
+      "ip": "192.168.0.10",
+      "port": 8501
+    },
+    "ref": {
+      "TS5000": "device_ts5000"
+    },
+    "subdevice": "dimmfeeder_B",
+    "type": "controller"
+  },
+  {
+    "_id": {
+      "$oid": "640977abfdefc19af4b39c3c"
+    },
+    "name": "device_kv8000_Conveyor",
+    "connector": "kv8000",
+    "controller": {
+      "ip": "192.168.0.10",
+      "port": 8501
+    },
+    "locked": true,
+    "receiver": {
+      "ip": "192.168.0.10",
+      "port": 8501
+    },
+    "ref": {
+      "TS5000": "device_ts5000"
+    },
+    "subdevice": "conveyor",
+    "type": "controller"
+  },
+  {
+    "_id": {
+      "$oid": "640977abfdefc19af4b39c3e"
+    },
+    "name": "device_kv8000_dimmfeeder",
+    "connector": "kv8000",
+    "controller": {
+      "ip": "192.168.0.10",
+      "port": 8501
+    },
+    "locked": true,
+    "receiver": {
+      "ip": "192.168.0.10",
+      "port": 8501
+    },
+    "ref": null,
+    "subdevice": "dimmfeeder",
+    "type": "controller"
+  },
+  {
+    "_id": {
+      "$oid": "640977abfdefc19af4b39c40"
+    },
+    "name": "device_kv8000_trayfeeder_A",
+    "connector": "kv8000",
+    "controller": {
+      "ip": "192.168.0.12",
+      "port": 8501
+    },
+    "locked": true,
+    "receiver": {
+      "ip": "192.168.0.12",
+      "port": 8501
+    },
+    "ref": null,
+    "subdevice": "trayfeeder_A",
+    "type": "controller"
+  },
+  {
+    "_id": {
+      "$oid": "640977abfdefc19af4b39c42"
+    },
+    "name": "device_kv8000_trayfeeder_B",
+    "connector": "kv8000",
+    "controller": {
+      "ip": "192.168.0.12",
+      "port": 8501
+    },
+    "locked": true,
+    "receiver": {
+      "ip": "192.168.0.12",
+      "port": 8501
+    },
+    "ref": null,
+    "subdevice": "trayfeeder_B",
+    "type": "controller"
+  },
+  {
+    "_id": {
+      "$oid": "640977abfdefc19af4b39c44"
+    },
+    "name": "device_kv8000_trayfeeder",
+    "connector": "kv8000",
+    "controller": {
+      "ip": "192.168.0.12",
+      "port": 8501
+    },
+    "locked": true,
+    "receiver": {
+      "ip": "192.168.0.12",
+      "port": 8501
+    },
+    "ref": null,
+    "subdevice": "trayfeeder",
+    "type": "controller"
+  },
+  {
+    "_id": {
+      "$oid": "64116dcdfdefc19af44d34ca"
+    },
+    "name": "asdsaf77",
+    "connector": "conveyor_sensor",
+    "controller": null,
+    "locked": true,
+    "receiver": {
+      "ip": "192.168.1.100",
+      "port": 123
+    },
+    "ref": {
+      "TS5000": "null",
+      "TABLE_A": "null",
+      "TABLE_B": "null",
+      "CONVEYOR": "null"
+    },
+    "subdevice": null,
+    "type": "sensor"
+  }
+]

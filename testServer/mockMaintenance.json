@@ -1,0 +1,296 @@
+[
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e130f"
+    },
+    "Item": "Robot_and_motor_bolts_check",
+    "Description": "1. Check robot installation blots\n2. Check robot & end effector connection bolts\n3. Check motors installation bolts\n4. Re-tighten if there are any loosened or unsecured bolts.",
+    "Duration": "Weekly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.143Z"
+    },
+    "Rank": 2,
+    "Refer to": "7.1.1",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1311"
+    },
+    "Item": "Robot_internal_bolts_check",
+    "Description": "1. Open robot arms cover\n2. Check robot motors installation bolts.\n3. Re-tighten if there are any loosened or unsecured bolts.",
+    "Duration": "Yearly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.144Z"
+    },
+    "Rank": 6,
+    "Refer to": "7.1.1",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1313"
+    },
+    "Item": "Cable_tube_and_protection_check",
+    "Description": "1. Make sure that the cables and air tubing on the moving parts are not worn out.\n2. Check the cable protecting tube on the robot is not loosen.\n3. Check the cable protecting chain on the slider is not loosen.\n4. Check all fans can work well (PC, robot controller, distribution area)",
+    "Duration": "Weekly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.145Z"
+    },
+    "Rank": 2,
+    "Refer to": "7.1.4",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1315"
+    },
+    "Item": "Robot_appearance_check",
+    "Description": "1. Check if there is any scratch found on the robot body and ball screw splline\n2. Use air-laid paper to clean them",
+    "Duration": "Daily",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.145Z"
+    },
+    "Rank": 1,
+    "Refer to": null,
+    "active": true
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1317"
+    },
+    "Item": "Cylinder_appearance_check",
+    "Description": "1. Check if there is any scratch found on the cylinder exposed piston rod. \n2. Use air-laid paper to clean it",
+    "Duration": "Daily",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.146Z"
+    },
+    "Rank": 1,
+    "Refer to": null,
+    "active": true
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1319"
+    },
+    "Item": "Corrosion_check",
+    "Description": "1. Check state of corrosion inhibitor on ball screw splline & flange\n2. Apply corrosion inhibitor(NOK Kluber A20 / WD-40) if needed.",
+    "Duration": "Weekly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.147Z"
+    },
+    "Rank": 2,
+    "Refer to": "7.6.3",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e131b"
+    },
+    "Item": "Timing_belt_check",
+    "Description": "1. Check timing belt(inside arm 2) tension.\n2. Check timing belt(DIMM Feeder) tension.\n3. Make sure that each timing belt is not worn off or cracked.",
+    "Duration": "Half Yearly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.148Z"
+    },
+    "Rank": 5,
+    "Refer to": "7.5.1",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e131d"
+    },
+    "Item": "Robot_smoothness_check",
+    "Description": "1. Move each axis by hand to check each robot axis operation.\n2. Contact robot vendor if the movement is not smooth",
+    "Duration": "Half Yearly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.149Z"
+    },
+    "Rank": 5,
+    "Refer to": "7.1.5",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e131f"
+    },
+    "Item": "Robot_lubricating",
+    "Description": "1. Use air-laid paper to clean robot ball screw shaft \n2. Check grease state and apply grease if needed.",
+    "Duration": "Monthly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.151Z"
+    },
+    "Rank": 3,
+    "Refer to": "7.1.4",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1321"
+    },
+    "Item": "Pitch_changer_lubricating",
+    "Description": "1. Use air-laid paper to clean pitch changer slider \n2. Use another new air-laid paper to smear the grease on the slider\n3. Do not add too much grease and let it dripping",
+    "Duration": "Monthly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.152Z"
+    },
+    "Rank": 3,
+    "Refer to": null,
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1323"
+    },
+    "Item": "Slider_lubricating",
+    "Description": "1. Use grease gun to apply grease on XY slider from grease nipple.\n2. Apply grease on the slider directly if there is no grease nipple.\n3. Use air-laid paper to clean the grease nipple.",
+    "Duration": "Monthly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.153Z"
+    },
+    "Rank": 3,
+    "Refer to": null,
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1325"
+    },
+    "Item": "Robot_stability_check",
+    "Description": "1. Power on the robot\n2. Push each robot arm by hand in the servo ON condition to make sure that the arm is secured/ not shaking.",
+    "Duration": "Weekly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.155Z"
+    },
+    "Rank": 2,
+    "Refer to": "7.6.3",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1327"
+    },
+    "Item": "Robot_motion_inspection",
+    "Description": "1. Power on the robot\n2. Make sure that no abnormal vibration or noise is caused",
+    "Duration": "Half Yearly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.157Z"
+    },
+    "Rank": 5,
+    "Refer to": "7.5.1",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1329"
+    },
+    "Item": "Robot_battery_replacement",
+    "Description": "1. Replace the batteries in battery box for position detection with new ones.",
+    "Duration": "Half Yearly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.158Z"
+    },
+    "Rank": 5,
+    "Refer to": "7.1.5",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e132b"
+    },
+    "Item": "Robot_overhaul",
+    "Description": "Check the consumable parts (motors, reduction gears, belts, ball screw, body hardness, LED lamp) and replace as necessary",
+    "Duration": "5-Yearly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.159Z"
+    },
+    "Rank": 7,
+    "Refer to": "7.1.5",
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e132d"
+    },
+    "Item": "Light_source_luminance_check",
+    "Description": "1. Setup illuminometer on the conveyor\n2. Check if light source luminance decay lower than threshold\n3. Increase light source output power untill luminance reading stay between UCL and LCL",
+    "Duration": "Quarterly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.160Z"
+    },
+    "Rank": 4,
+    "Refer to": null,
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e132f"
+    },
+    "Item": "Vision_part_check",
+    "Description": "1. Check if the camera or lightsouce is unsecured\n2. Re-tighten if there are any loosened or unsecured bolts or cables.\n3. Check if any obstacle or smudge on the lens of vision system\n4. Use air-laid paper to clean up if needed",
+    "Duration": "Weekly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.161Z"
+    },
+    "Rank": 2,
+    "Refer to": null,
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1331"
+    },
+    "Item": "Barcode_reader_check",
+    "Description": "1. Check if the barcode reader is unsecured\n2. Re-tighten if there are any loosened or unsecured bolts or cables.\n3. Check if any obstacle or smudge on the barcode reader\n4. Use air-laid paper to clean up if needed",
+    "Duration": "Weekly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.163Z"
+    },
+    "Rank": 2,
+    "Refer to": null,
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1333"
+    },
+    "Item": "CDA_condense_water_check",
+    "Description": "1. Check pneumatic regulator pressure setting.\n2. Reset if setting is out of spec\n3. Check if there is any pneumatic condensate water in the cup\n4. Clean up the condensate water cup",
+    "Duration": "Daily",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.165Z"
+    },
+    "Rank": 1,
+    "Refer to": null,
+    "active": true
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1335"
+    },
+    "Item": "CDA_filter_replacment",
+    "Description": "1. Check the pneumatic system filter condition\n2. Replace the filter if needed",
+    "Duration": "Weekly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.166Z"
+    },
+    "Rank": 2,
+    "Refer to": null,
+    "active": false
+  },
+  {
+    "_id": {
+      "$oid": "64082adb867ab16e6a0e1337"
+    },
+    "Item": "Control_part_clean_up",
+    "Description": "1. Use vacume cleaner to clean the PC, controller and distribution area\n2. Clean the fan on the partition\n3. Use air-laid paper to clean the monitor, touch panel, distribution board and penumatic board",
+    "Duration": "Quarterly",
+    "LastCheck": {
+      "$date": "2023-03-14T07:13:35.167Z"
+    },
+    "Rank": 4,
+    "Refer to": null,
+    "active": false
+  }
+]

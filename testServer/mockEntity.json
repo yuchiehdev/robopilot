@@ -1,0 +1,104 @@
+[
+  {
+    "_id": {
+      "$oid": "640844e7867ab16e6a459e2b"
+    },
+    "entityName": "entity_test1",
+    "action": "Ts5000_C2080",
+    "device": "device_ts5000",
+    "module": "Ts5000Connector",
+    "parameters": {
+      "device": "device_ts5000",
+      "sensor": []
+    },
+    "position": {
+      "x": -441.1238488682332,
+      "y": 61.72222222222226
+    }
+  },
+  {
+    "_id": {
+      "$oid": "640844e7867ab16e6a459e2f"
+    },
+    "entityName": "entity_test2",
+    "action": "Kv8000_TABLE_A",
+    "device": "device_kv8000_dimmfeeder_A",
+    "module": "Kv8000Connector",
+    "parameters": {
+      "device": "device_kv8000_dimmfeeder_A",
+      "sensor": []
+    },
+    "position": {
+      "x": -192.23495997934418,
+      "y": 221.72222222222226
+    }
+  },
+  {
+    "_id": {
+      "$oid": "640844e7867ab16e6a459e32"
+    },
+    "entityName": "entity_test3",
+    "action": "Kv8000_TABLE_B",
+    "device": "device_kv8000_dimmfeeder_B",
+    "module": "Kv8000Connector",
+    "parameters": {
+      "device": "device_kv8000_dimmfeeder_B",
+      "sensor": []
+    },
+    "position": {
+      "x": -203.3460710904553,
+      "y": -102.72222222222223
+    }
+  },
+  {
+    "_id": {
+      "$oid": "640844e7867ab16e6a459e35"
+    },
+    "entityName": "entity_test4",
+    "action": "Kv8000_CONVEYOR",
+    "device": "device_kv8000_Conveyor",
+    "module": "Kv8000Connector",
+    "parameters": {
+      "device": "device_kv8000_Conveyor",
+      "sensor": []
+    },
+    "position": {
+      "x": -796.6794044237886,
+      "y": 62.8333333333334
+    }
+  },
+  {
+    "_id": {
+      "$oid": "640844e7867ab16e6a459e38"
+    },
+    "entityName": "entity_trayfeeder_A",
+    "action": "Kv8000_TRAYFEEDER_A",
+    "device": "device_kv8000_trayfeeder_A",
+    "module": "Kv8000Connector",
+    "parameters": {
+      "device": "device_kv8000_trayfeeder_A",
+      "sensor": []
+    },
+    "position": {
+      "x": 147.38888888888903,
+      "y": -183.83333333333331
+    }
+  },
+  {
+    "_id": {
+      "$oid": "640844e7867ab16e6a459e3c"
+    },
+    "entityName": "entity_trayfeeder_B",
+    "action": "Kv8000_TRAYFEEDER_B",
+    "device": "device_kv8000_trayfeeder_B",
+    "module": "Kv8000Connector",
+    "parameters": {
+      "device": "device_kv8000_trayfeeder_B",
+      "sensor": []
+    },
+    "position": {
+      "x": 164.0555555555556,
+      "y": 236.16666666666669
+    }
+  }
+]

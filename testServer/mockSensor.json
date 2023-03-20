@@ -1,0 +1,503 @@
+{
+  "Master mode": {
+    "code": "OK",
+    "name": "Master mode",
+    "value": "1",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "Execution mode": {
+    "code": "OK",
+    "name": "Execution mode",
+    "value": "1",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "Filename": {
+    "code": "OK",
+    "name": "Filename",
+    "value": "1/C2080_2",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "Speed Override": {
+    "code": "OK",
+    "name": "Speed Override",
+    "value": "100",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "Execution status": {
+    "code": "OK",
+    "name": "Execution status",
+    "value": "2",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "Servo power status": {
+    "code": "OK",
+    "name": "Servo power status",
+    "value": "0",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "Guide coordinate state": {
+    "code": "OK",
+    "name": "Guide coordinate state",
+    "value": "3",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "Boot Speed": {
+    "code": "OK",
+    "name": "Boot Speed",
+    "value": "0",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "Boot Volume": {
+    "code": "OK",
+    "name": "Boot Volume",
+    "value": "0",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "Workpiece coordinate name": {
+    "code": "OK",
+    "name": "Workpiece coordinate name",
+    "value": ".world",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "Tool coordinate name": {
+    "code": "OK",
+    "name": "Tool coordinate name",
+    "value": "CAMERA",
+    "tag": "STC",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_3_1": {
+    "code": "OK",
+    "name": "MER_3_1",
+    "X": -75.398,
+    "Y": -5.47,
+    "Z": 0.0,
+    "C": 0.0,
+    "tag": "MER",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_3_2": {
+    "code": "OK",
+    "name": "MER_3_2",
+    "X": -0.911,
+    "Y": -0.113,
+    "Z": 0.0,
+    "C": 0.0,
+    "tag": "MER",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_3_3": {
+    "code": "OK",
+    "name": "MER_3_3",
+    "X": 525.108,
+    "Y": 13.492,
+    "Z": 167.118,
+    "C": -179.666,
+    "tag": "MER",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_3_4": {
+    "code": "OK",
+    "name": "MER_3_4",
+    "X": -146.423,
+    "Y": -290.214,
+    "Z": 190.142,
+    "C": -180.473,
+    "tag": "MER",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_3_5": {
+    "code": "OK",
+    "name": "MER_3_5",
+    "X": -147.406,
+    "Y": 299.814,
+    "Z": 190.142,
+    "C": 179.726,
+    "tag": "MER",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_1": {
+    "code": "OK",
+    "name": "MER_4_1",
+    "X": 33.12,
+    "Y": 4.991,
+    "Z": -78.142,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 1.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_2": {
+    "code": "OK",
+    "name": "MER_4_2",
+    "X": 40.301,
+    "Y": 4.978,
+    "Z": -78.142,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 1.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_3": {
+    "code": "OK",
+    "name": "MER_4_3",
+    "X": 95.288,
+    "Y": 5.792,
+    "Z": -78.142,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 1.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_4": {
+    "code": "OK",
+    "name": "MER_4_4",
+    "X": 102.962,
+    "Y": 5.884,
+    "Z": -78.142,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 1.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_5": {
+    "code": "OK",
+    "name": "MER_4_5",
+    "X": 33.109,
+    "Y": 5.332,
+    "Z": -78.142,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 2.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_6": {
+    "code": "OK",
+    "name": "MER_4_6",
+    "X": 40.452,
+    "Y": 5.218,
+    "Z": -78.142,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 2.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_7": {
+    "code": "OK",
+    "name": "MER_4_7",
+    "X": 95.621,
+    "Y": 5.714,
+    "Z": -78.142,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 2.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_8": {
+    "code": "OK",
+    "name": "MER_4_8",
+    "X": 102.992,
+    "Y": 5.854,
+    "Z": -78.142,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 2.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_9": {
+    "code": "OK",
+    "name": "MER_4_9",
+    "X": -22.594,
+    "Y": -113.085,
+    "Z": -72.0,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 1.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_10": {
+    "code": "OK",
+    "name": "MER_4_10",
+    "X": 130.069,
+    "Y": -110.988,
+    "Z": -72.0,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 1.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_11": {
+    "code": "OK",
+    "name": "MER_4_11",
+    "X": 187.635,
+    "Y": -110.399,
+    "Z": -72.0,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 1.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_12": {
+    "code": "OK",
+    "name": "MER_4_12",
+    "X": 340.5,
+    "Y": -108.69,
+    "Z": -72.0,
+    "C": 0.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 1.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_13": {
+    "code": "OK",
+    "name": "MER_4_13",
+    "X": -14.389,
+    "Y": -112.833,
+    "Z": -72.0,
+    "C": 360.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 2.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_14": {
+    "code": "OK",
+    "name": "MER_4_14",
+    "X": 122.794,
+    "Y": -111.399,
+    "Z": -72.0,
+    "C": 360.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 2.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_15": {
+    "code": "OK",
+    "name": "MER_4_15",
+    "X": 196.216,
+    "Y": -110.595,
+    "Z": -72.0,
+    "C": 360.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 2.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_16": {
+    "code": "OK",
+    "name": "MER_4_16",
+    "X": 333.467,
+    "Y": -108.944,
+    "Z": -72.0,
+    "C": 360.0,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 2.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "MER_4_17": {
+    "code": "OK",
+    "name": "MER_4_17",
+    "X": 525.108,
+    "Y": 13.492,
+    "Z": 167.118,
+    "C": -179.666,
+    "tag": "MER",
+    "T": 0.0,
+    "posture": 1.0,
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "PSW": {
+    "code": "OK",
+    "name": "PSW",
+    "X": 525.127,
+    "Y": 13.532,
+    "Z": 167.11,
+    "C": -179.647,
+    "T": 0.0,
+    "posture": 1.0,
+    "tag": "PSW",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "STATUS": {
+    "code": "OK",
+    "name": "STATUS",
+    "value": 1.0,
+    "tag": "C2080",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "IS_START": {
+    "code": "OK",
+    "name": "IS_START",
+    "value": 0.0,
+    "tag": "C2080",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "RIGHT_RESULT": {
+    "code": "OK",
+    "name": "RIGHT_RESULT",
+    "value": -1.0,
+    "tag": "C2080",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "LEFT_RESULT": {
+    "code": "OK",
+    "name": "LEFT_RESULT",
+    "value": -1.0,
+    "tag": "C2080",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "IS_SW_READY": {
+    "code": "OK",
+    "name": "IS_SW_READY",
+    "value": 0.0,
+    "tag": "C2080",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "TIME_PP_R": {
+    "code": "OK",
+    "name": "TIME_PP_R",
+    "value": 32.188,
+    "tag": "C2080",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "TIME_PP_L": {
+    "code": "OK",
+    "name": "TIME_PP_L",
+    "value": 36.248,
+    "tag": "C2080",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "TIME_PRESS": {
+    "code": "OK",
+    "name": "TIME_PRESS",
+    "value": 17.586,
+    "tag": "C2080",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "TIME_VIS_CAL": {
+    "code": "OK",
+    "name": "TIME_VIS_CAL",
+    "value": 0.692,
+    "tag": "C2080",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  },
+  "PROGRESS": {
+    "code": "OK",
+    "name": "PROGRESS",
+    "value": 0.0,
+    "tag": "C2080",
+    "timestamp": {
+      "$date": "2023-03-17T00:46:05.199Z"
+    }
+  }
+}

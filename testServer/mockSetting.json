@@ -1,0 +1,154 @@
+{
+  "conn_table": {
+    "ts5000": {
+      "module": "Ts5000Connector",
+      "path": "lib/connector/ts5000Connector",
+      "type": "controller",
+      "action": ["Ts5000_C2080"],
+      "controller": {
+        "ip": null,
+        "port": null
+      },
+      "receiver": {
+        "ip": null,
+        "port": null
+      }
+    },
+    "kv8000": {
+      "module": "Kv8000Connector",
+      "path": "lib/connector/kv8000Connector",
+      "type": "controller",
+      "action": [
+        "Kv8000_DIMMFEEDER",
+        "Kv8000_TABLE_A",
+        "Kv8000_TABLE_B",
+        "Kv8000_CONVEYOR",
+        "Kv8000_TRAYFEEDER",
+        "Kv8000_TRAYFEEDER_A",
+        "Kv8000_TRAYFEEDER_B"
+      ],
+      "subdevice": [
+        "dimmfeeder",
+        "dimmfeeder_A",
+        "dimmfeeder_B",
+        "conveyor",
+        "trayfeeder_A",
+        "trayfeeder_B",
+        "trayfeeder"
+      ],
+      "controller": {
+        "ip": null,
+        "port": null
+      },
+      "receiver": {
+        "ip": null,
+        "port": null
+      }
+    },
+    "conveyor_sensor": {
+      "module": "Kv8000Connector",
+      "path": "lib/connector/kv8000Connector",
+      "type": "sensor",
+      "receiver": {
+        "ip": null,
+        "port": null
+      }
+    }
+  },
+  "action_mapping_table": {
+    "TS5000": "ts5000",
+    "DIMMFEEDER": "kv8000",
+    "TABLE_A": "kv8000",
+    "TABLE_B": "kv8000",
+    "CONVEYOR": "kv8000",
+    "TRAYFEEDER": "kv8000",
+    "TRAYFEEDER_A": "kv8000",
+    "TRAYFEEDER_B": "kv8000"
+  },
+  "action_table": {
+    "Ts5000_C2080": {
+      "module": "Ts5000_C2080",
+      "path": "model/actions/Ts5000_C2080",
+      "parameters": {
+        "device": "device",
+        "sensor": "sensor"
+      }
+    },
+    "Kv8000_DIMMFEEDER": {
+      "module": "Kv8000_DIMMFEEDER",
+      "path": "model/actions/Kv8000_DIMMFEEDER",
+      "parameters": {
+        "device": "device",
+        "sensor": "sensor"
+      }
+    },
+    "Kv8000_TABLE_A": {
+      "module": "Kv8000_TABLE_A",
+      "path": "model/actions/Kv8000_TABLE_A",
+      "parameters": {
+        "device": "device",
+        "sensor": "sensor"
+      }
+    },
+    "Kv8000_TABLE_B": {
+      "module": "Kv8000_TABLE_B",
+      "path": "model/actions/Kv8000_TABLE_B",
+      "parameters": {
+        "device": "device",
+        "sensor": "sensor"
+      }
+    },
+    "Kv8000_CONVEYOR": {
+      "module": "Kv8000_CONVEYOR",
+      "path": "model/actions/Kv8000_CONVEYOR",
+      "parameters": {
+        "device": "device",
+        "sensor": "sensor"
+      }
+    },
+    "Kv8000_TRAYFEEDER": {
+      "module": "Kv8000_TRAYFEEDER",
+      "path": "model/actions/Kv8000_TRAYFEEDER",
+      "parameters": {
+        "device": "device",
+        "sensor": "sensor"
+      }
+    },
+    "Kv8000_TRAYFEEDER_A": {
+      "module": "Kv8000_TRAYFEEDER_A",
+      "path": "model/actions/Kv8000_TRAYFEEDER_A",
+      "parameters": {
+        "device": "device",
+        "sensor": "sensor"
+      }
+    },
+    "Kv8000_TRAYFEEDER_B": {
+      "module": "Kv8000_TRAYFEEDER_B",
+      "path": "model/actions/Kv8000_TRAYFEEDER_B",
+      "parameters": {
+        "device": "device",
+        "sensor": "sensor"
+      }
+    }
+  },
+  "mongo": {
+    "ip": "mongo-service",
+    "port": 27017,
+    "username": "ifuwang",
+    "password": "password",
+    "db": "robotnest"
+  },
+  "memcache": {
+    "ip": "memcache-service",
+    "port": 11211,
+    "keyDefination": {
+      "alarm": "error",
+      "production": "production"
+    }
+  },
+  "ldap": {
+    "ip": "ldap://10.249.1.11:389",
+    "base_dn": "CN=Robotnest,OU=Without_Mail,OU=Public_Account,OU=WYTN,DC=wiwynn,DC=corp",
+    "password": "BLNE00__0217"
+  }
+}

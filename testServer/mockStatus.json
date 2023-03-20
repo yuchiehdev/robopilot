@@ -1,0 +1,65 @@
+[
+  {
+    "device": "device_ts5000",
+    "status": "Ready",
+    "timestamp": {
+      "$date": "2023-03-17T00:31:54.446Z"
+    }
+  },
+  {
+    "device": "device_kv8000_dimmfeeder_B",
+    "status": "Complete",
+    "timestamp": {
+      "$date": "2023-03-17T00:31:54.443Z"
+    }
+  },
+  {
+    "device": "device_kv8000_Conveyor",
+    "status": "Ready",
+    "timestamp": {
+      "$date": "2023-03-17T00:31:54.443Z"
+    }
+  },
+  {
+    "device": "device_kv8000_dimmfeeder_A",
+    "status": "NotReady",
+    "timestamp": {
+      "$date": "2023-03-17T00:31:54.451Z"
+    }
+  },
+  {
+    "device": "device_kv8000_trayfeeder_B",
+    "status": "Ready",
+    "timestamp": {
+      "$date": "2023-03-17T00:31:53.561Z"
+    }
+  },
+  {
+    "device": "device_kv8000_trayfeeder",
+    "status": "Ready",
+    "timestamp": {
+      "$date": "2023-03-17T00:31:54.442Z"
+    }
+  },
+  {
+    "device": "device_kv8000_trayfeeder_A",
+    "status": "Ready",
+    "timestamp": {
+      "$date": "2023-03-17T00:31:53.562Z"
+    }
+  },
+  {
+    "device": "device_kv8000_dimmfeeder",
+    "status": "NotReady",
+    "timestamp": {
+      "$date": "2023-03-17T00:31:54.443Z"
+    }
+  },
+  {
+    "device": "asdsaf77",
+    "status": "Disconnected",
+    "timestamp": {
+      "$date": "2023-03-17T00:31:48.956Z"
+    }
+  }
+]
