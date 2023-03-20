@@ -1,0 +1,19 @@
+.board-today {
+  background-color: #f1f5f7;
+  border-radius: 8px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+.fitt {
+  // max-width: calc(100vw - 10%);
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  &::-moz-scrollbar {
+    scrollbar-width: thin;
+  }
+}

@@ -1,0 +1,32 @@
+.dialogBottom {
+  background: #313546;
+  color: white;
+  height: 62px;
+  margin-bottom: 10px;
+  position: relative;
+  width: 20rem;
+  height: 2.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  border-radius: 0.7rem;
+}
+.dialogBottom::after {
+  border-color: #313546 #313546 transparent transparent;
+  border-style: solid solid solid solid;
+
+  /* 設定邊框大小可拼湊出任意形狀的三角形 */
+  border-width: 10px 8px;
+
+  bottom: -6px;
+
+  /* 必須指定，才能顯示內容 */
+  content: '';
+
+  height: 0px;
+
+  /* 必須指定，否則會變梯形 */
+  position: absolute;
+  left: 46px;
+  left: 30px;
+  width: 0px;
+}

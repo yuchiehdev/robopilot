@@ -1,0 +1,19 @@
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -33px;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 0.11rem;
+  height: 75%;
+  background-color: #ededed;
+  top: 30px;
+  left: -26px;
+}

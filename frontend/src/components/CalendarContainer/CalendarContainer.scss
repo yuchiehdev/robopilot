@@ -1,0 +1,81 @@
+.react-calendar {
+  width: 400px;
+  max-width: 100%;
+  background-color: #fff;
+  color: #222;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+
+  &__month-view__days__day--weekend {
+    color: #d10000;
+  }
+
+  &__year-view &__tile,
+  &__decade-view &__tile,
+  &__century-view &__tile {
+    padding: 0.7em 0.2rem;
+  }
+}
+
+.react-calendar__navigation {
+  background-color: rgb(0, 108, 146);
+  padding-bottom: 0.3rem;
+  text-align: center;
+
+  & button {
+    background-color: rgb(0, 108, 146);
+    color: #fff;
+    min-width: 44px;
+    background: none;
+    font-size: 16px;
+    margin-top: 8px;
+
+    &:enabled:hover,
+    &:enabled:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &[disabled] {
+      background-color: rgba(0, 108, 146);
+      cursor: default;
+    }
+  }
+}
+
+abbr[title] {
+  text-decoration: none;
+}
+
+.react-calendar__tile {
+  &:enabled:hover,
+  &:enabled:focus {
+    background: rgba(0, 108, 146, 0.2);
+    color: rgb(0, 108, 146);
+    border-radius: 6px;
+  }
+
+  &:enabled:focus,
+  &--active:enabled,
+  &--active:enabled:hover {
+    background: rgb(0, 108, 146);
+    color: white;
+    border-radius: 6px;
+  }
+
+  &--now {
+    background: rgba(0, 108, 146, 0.6);
+    border-radius: 6px;
+    font-weight: bold;
+    color: rgb(142, 211, 0) !important;
+
+    &:enabled:hover,
+    &:enabled:focus {
+      background: rgba(0, 108, 146, 0.6);
+      border-radius: 6px;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "employee_id": "1234567890",
+    "name": "John Doe",
+    "email": "johndoe.wiwynn.com",
+    "department": "BEM100",
+    "access_level": "Engineer",
+    "group": "Test-Tray-G1"
+  },
+  {
+    "id": "2",
+    "employee_id": "2234567890",
+    "name": "Adom Smith",
+    "email": "adomsmith.wiwynn.com",
+    "department": "BET000",
+    "access_level": "Guest",
+    "group": "Test-Tray-G1"
+  },
+  {
+    "id": "3",
+    "employee_id": "3234567890",
+    "name": "Adam Lie",
+    "email": "adamlie.wiwynn.com",
+    "department": "BLN000",
+    "access_level": "Guest",
+    "group": "Prod-Dimm-G1"
+  },
+  {
+    "id": "4",
+    "employee_id": "4234567890",
+    "name": "Kevin Wang",
+    "email": "kevinwang.wiwynn.com",
+    "department": "BLT100",
+    "access_level": "Developer",
+    "group": "Test-Tray-G2"
+  }
+]

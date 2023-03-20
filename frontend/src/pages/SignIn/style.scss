@@ -1,0 +1,6 @@
+label.signin-method {
+  input:checked + p {
+    color: rgb(0, 108, 146);
+    border-bottom: 3px solid rgb(0, 108, 146);
+  }
+}
