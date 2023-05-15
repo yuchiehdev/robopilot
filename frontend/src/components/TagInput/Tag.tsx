@@ -1,9 +1,9 @@
 import './TagInput.scss';
-import { tagObjType } from '../../pages/Event';
+import type { TagObjType } from '../../types';
 
 type tagProps = {
-  tag: tagObjType;
-  remove: (removedTag: tagObjType) => void;
+  tag: TagObjType;
+  remove: (removedTag: TagObjType) => void;
 };
 const Tag = ({ remove, tag }: tagProps) => {
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events

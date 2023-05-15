@@ -1,16 +1,15 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useClickOutsideSingle } from '../../hooks/useClickOutside';
 
 type DDLProps = {
   selected: string;
   setSelected: (value: string) => void;
-  listitems: string[];
+  listItems: string[];
   styleCSS?: string;
   icon?: React.ReactNode;
-  forwardRef?: any;
   arrowColor?: string;
   checked: boolean[];
   setChecked: (value: boolean[]) => void;
@@ -19,10 +18,9 @@ type DDLProps = {
 const DDL = ({
   selected,
   setSelected,
-  listitems,
+  listItems,
   styleCSS,
   icon,
-  forwardRef,
   arrowColor,
   checked,
   setChecked,
@@ -37,18 +35,12 @@ const DDL = ({
       return false;
     });
     setChecked(newChecked);
-    setSelected(listitems[key]);
+    setSelected(listItems[key]);
   };
-
-  useEffect(() => {
-    if (forwardRef?.current) {
-      forwardRef.current.focus();
-    }
-  }, [isList]);
 
   const clickHandler = () => setIsList(!isList);
 
-  const { domNode }: any = useClickOutsideSingle(() => {
+  const { domNode } = useClickOutsideSingle<HTMLDivElement>(() => {
     setIsList(false);
   });
 
@@ -72,7 +64,7 @@ const DDL = ({
           isList ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         } absolute right-0 z-10 mt-2 rounded-lg border border-[#F3F3F3] bg-white drop-shadow-md`}
       >
-        {listitems.map((item, key) => {
+        {listItems.map((item, key) => {
           return (
             <div
               key={item}

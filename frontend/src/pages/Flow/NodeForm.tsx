@@ -1,9 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useEffect, useRef, memo, useState } from 'react';
-import { useAppSelector } from '../../store';
-import type { EntityType } from '../../types';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useRef, memo, useState, useMemo } from 'react';
+import type { DeviceType, EntityType } from '../../types';
+import { getDevice, getDeviceSetting } from '../../api/device';
 
+const refetchInterval = 1000;
 type NodeSubmitData = {
   name: string;
   device: string;
@@ -48,26 +50,71 @@ const NodeForm = ({
     }
     toggleModal();
   };
-
-  const device = useAppSelector((state) => state.device);
   const actionRef = useRef<HTMLSelectElement>(null);
   const [nameAlert, setNameAlert] = useState('');
   useEffect(() => {
     setFocus('name');
+  }, []);
+  const {
+    data: deviceData,
+    isLoading: deviceIsLoading,
+    isError: deviceIsError,
+    error: deviceError,
+    isSuccess: deviceIsSuccess,
+  } = useQuery({
+    queryKey: ['device'],
+    queryFn: getDevice,
+    refetchInterval,
   });
-  const deviceOptions = device.device.map((item) => (
+  const {
+    data: deviceSettingData,
+    isLoading: deviceSettingIsLoading,
+    isError: deviceStatusIsError,
+    error: deviceStatusError,
+  } = useQuery({
+    queryKey: ['status'],
+    queryFn: getDeviceSetting,
+    refetchInterval,
+    cacheTime: Infinity,
+  });
+  const formattedDeviceData = useMemo(() => {
+    if (deviceIsSuccess) {
+      return deviceData.map((item: DeviceType) => {
+        const {
+          _id: { $oid },
+          connector,
+        } = item;
+        return {
+          ...item,
+          id: $oid,
+          connector: connector.replaceAll('_', ' '),
+          receiverIp: item.receiver.ip.replaceAll('.', ''),
+          receiverPort: item.receiver.port,
+          controllerIp: item.controller?.ip.replaceAll('.', '') || null,
+          controllerPort: item.controller?.port || null,
+        };
+      });
+    }
+    return [];
+  }, [deviceIsSuccess, deviceData]);
+  if (deviceIsLoading || deviceSettingIsLoading) return <div>Loading...</div>;
+
+  const deviceOptions = formattedDeviceData.map((item: DeviceType) => (
     <option value={item.name} key={item._id.$oid}>
       {item.name}
     </option>
   ));
   const actionOptions = () => {
-    const currentSelected = watch('device');
-    const currentSelectedDevice = device.device.find((d) => d.name === currentSelected);
+    const currentSelected =
+      watch('device') || updateNode?.data.device || formattedDeviceData[0].name;
+    const currentSelectedDevice = formattedDeviceData.find(
+      (d: DeviceType) => d.name === currentSelected,
+    );
 
     switch (currentSelectedDevice?.connector) {
       case 'ts5000':
-        module = device.setting?.conn_table.ts5000.module || 'Controller Node';
-        return device.setting?.conn_table.ts5000.action?.map((item) => {
+        module = deviceSettingData?.conn_table?.ts5000?.module || 'Controller Node';
+        return deviceSettingData?.conn_table?.ts5000?.action?.map((item: string) => {
           return (
             <option value={item} key={item}>
               {item}
@@ -75,8 +122,8 @@ const NodeForm = ({
           );
         });
       case 'kv8000':
-        return device.setting?.conn_table.kv8000.action?.map((item) => {
-          module = device.setting?.conn_table.kv8000.module || 'Controller Node';
+        return deviceSettingData?.conn_table?.kv8000?.action?.map((item: string) => {
+          module = deviceSettingData?.conn_table?.kv8000?.module || 'Controller Node';
           return (
             <option value={item} key={item}>
               {item}
@@ -87,7 +134,8 @@ const NodeForm = ({
         return null;
     }
   };
-
+  if (deviceIsError) return <div>{JSON.stringify(deviceError)}</div>;
+  if (deviceStatusIsError) return <div>{JSON.stringify(deviceStatusError)}</div>;
   return (
     <form
       onSubmit={handleSubmit(onSubmitHandler)}
@@ -121,7 +169,7 @@ const NodeForm = ({
         <label htmlFor="Device" className="text-lg font-semibold">
           Device
           <select
-            defaultValue={updateNode?.data.device}
+            defaultValue={updateNode?.data.device || formattedDeviceData[0]?.name}
             id="device"
             className="ml-6 rounded-md border-2 border-gray-80  px-2 text-base font-normal text-black"
             {...register('device')}

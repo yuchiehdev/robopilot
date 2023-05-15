@@ -1,17 +1,14 @@
 import Button from './Button';
-import { useAppSelector, useAppDispatch } from '../../store';
-import { postControllerStart } from '../../store/controllerSlice';
+import { useAppSelector } from '../../store';
 import { ReactComponent as InputIcon } from '../../assets/icons/login.svg';
 import { ReactComponent as OutputIcon } from '../../assets/icons/logout.svg';
 
 const ButtonsBar = () => {
-  const dispatch = useAppDispatch();
   const isStartBtnIsClicked = useAppSelector(
     (state) => state.controller.startBtnIsClicked,
   );
-
   const onStartBtnClick = (action: 'ON' | 'OFF') => {
-    dispatch(postControllerStart(action));
+    console.log('button clicked', action);
   };
 
   return (

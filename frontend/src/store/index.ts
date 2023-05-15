@@ -1,12 +1,11 @@
 import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';
 import { configureStore, PreloadedState, combineReducers } from '@reduxjs/toolkit';
 import userReducer from './userSlice';
-import eventReducerQuery from './eventQuerySlice';
+import eventReducerQuery from './eventSlice';
 import sensorReducer from './sensorSlice';
 import deviceReducer from './deviceSlice';
 import alarmReducer from './alarmSlice';
 import controllerReducer from './controllerSlice';
-import flowReducer from './flowSlice';
 import maintenanceReducer from './maintenanceSlice';
 import dashboardReducer from './dashboardSlice';
 
@@ -18,7 +17,6 @@ const store = configureStore({
     eventQuery: eventReducerQuery,
     sensor: sensorReducer,
     user: userReducer,
-    flow: flowReducer,
     maintenance: maintenanceReducer,
     dashboard: dashboardReducer,
   },

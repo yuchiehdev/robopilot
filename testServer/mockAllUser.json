@@ -1,0 +1,82 @@
+[
+  {
+    "_id": {
+      "$oid": "641a6f348286c3659f108d9b"
+    },
+    "username": "admin_e",
+    "company": null,
+    "department": null,
+    "employeeID": null,
+    "group": null,
+    "local": true,
+    "mail": null,
+    "name": "admin_e",
+    "password": "admin_e",
+    "permission": "Engineer",
+    "title": null
+  },
+  {
+    "_id": {
+      "$oid": "641a6f348286c3659f108d9d"
+    },
+    "username": "admin_v",
+    "company": null,
+    "department": null,
+    "employeeID": null,
+    "group": null,
+    "local": true,
+    "mail": null,
+    "name": "admin_v",
+    "password": "admin_v",
+    "permission": "Site Vender",
+    "title": null
+  },
+  {
+    "_id": {
+      "$oid": "64225ab6db831f3a2bd1cd0a"
+    },
+    "username": "11110635",
+    "company": "WYTN",
+    "department": "BLNE00",
+    "employeeID": "11110635",
+    "group": "aadf",
+    "local": false,
+    "mail": "Jessica_YC_Wu@wiwynn.com",
+    "name": "Jessica YC Wu",
+    "password": null,
+    "permission": "Guest",
+    "title": "Engineer"
+  },
+  {
+    "_id": {
+      "$oid": "64225b5a506f7911b27df869"
+    },
+    "username": "admin",
+    "company": null,
+    "department": null,
+    "employeeID": null,
+    "group": "Test-Tray-G1",
+    "local": true,
+    "mail": null,
+    "name": "admin",
+    "password": "admin",
+    "permission": "Developer",
+    "title": null
+  },
+  {
+    "_id": {
+      "$oid": "64225c0ddb831f3a2bd79834"
+    },
+    "username": "10910634",
+    "company": "WYTN",
+    "department": "BLNE00",
+    "employeeID": "10910634",
+    "group": "test36",
+    "local": false,
+    "mail": "Boyu_Lin@wiwynn.com",
+    "name": "Boyu Lin",
+    "password": null,
+    "permission": "Engineer",
+    "title": "Engineer"
+  }
+]

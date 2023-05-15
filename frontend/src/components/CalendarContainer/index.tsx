@@ -1,4 +1,3 @@
-import React, { LegacyRef } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './CalendarContainer.scss';
@@ -8,7 +7,6 @@ type CalendarContainerProps = {
   setDate: (date: Date) => void;
   maxDate?: Date | undefined;
   minDate?: Date | undefined;
-  forwardRef?: LegacyRef<HTMLDivElement>;
 };
 
 const CalendarContainer: React.FC<CalendarContainerProps> = ({
@@ -16,10 +14,9 @@ const CalendarContainer: React.FC<CalendarContainerProps> = ({
   setDate,
   maxDate,
   minDate,
-  forwardRef,
 }) => {
   return (
-    <div ref={forwardRef}>
+    <div>
       <Calendar
         value={date}
         onChange={setDate}

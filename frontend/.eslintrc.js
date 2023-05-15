@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: ['jest-dom', 'testing-library'],
+  plugins: ['jest-dom', 'testing-library', 'prettier'],
   extends: [
     'react-app',
     'react-app/jest',
@@ -15,7 +15,19 @@ module.exports = {
     },
   },
   rules: {
-    'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    'prettier/prettier': [
+      'error',
+      {
+        tailwindConfig: './tailwind.config.js',
+        semi: true,
+        trailingComma: 'all',
+        singleQuote: true,
+        tabWidth: 2,
+        printWidth: 90,
+        useTabs: false,
+        endOfLine: 'auto',
+      },
+    ],
     'no-param-reassign': 0,
     'no-restricted-exports': 0,
     'no-use-before-define': 'off',

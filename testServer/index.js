@@ -2,15 +2,41 @@ const express = require("express");
 const app = express();
 const PORT = 5003;
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const fs = require("fs");
+const path = require("path");
+const axios = require("axios");
 
 app.use(express.json());
 app.use(
   cors({
     origin: "*",
     credentials: true,
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT"],
   })
 );
+
+app.post("/router_robotNest/webhooktest", async (req, res) => {
+  const { webhookUrl, message } = req.body;
+
+  if (!webhookUrl || !message) {
+    res.status(400).json({ error: "webhookUrl and message are required" });
+    return;
+  }
+
+  try {
+    const payload = {
+      title: message.title,
+      text: message.text,
+    };
+
+    await axios.post(webhookUrl, payload);
+    res.status(200).json({ message: "Message sent successfully!" });
+  } catch (error) {
+    console.error("Error sending message:", error);
+    res.status(500).json({ error: "Failed to send message" });
+  }
+});
 
 app.get("/tshirt", (req, res) => {
   res.status(200).send({
@@ -71,9 +97,213 @@ app.get("/router_robotNest/device", (req, res) => {
   const data = require("./mockDevice.json");
   res.json(data);
 });
+app.get("/router_robotNest/sensor", (req, res) => {
+  const device = req.query.device;
+  if (device) {
+    if (device === "device_kv8000_trayfeeder_A") {
+      const data = require("./mockSensorTrayFeederA.json");
+      res.json(data);
+    } else if (device === "device_kv8000_trayfeeder_B") {
+      const data = require("./mockSensorTrayFeederB.json");
+      res.json(data);
+    } else {
+      const data = require("./mockSensor3.json");
+      res.json(data);
+    }
+  }
+});
+app.get("/router_robotNest/resource", (req, res) => {
+  const data = require("./mockResource.json");
+  res.json(data);
+});
+app.get("/router_robotNest/production", (req, res) => {
+  const data = require("./mockProduction.json");
+  res.json(data);
+});
 app.get("/router_robotNest/status", (req, res) => {
   const data = require("./mockStatus.json");
   res.json(data);
+});
+
+const secretKey =
+  "d8gH5kLm9pN12rStU8xWz0cD6eF3gH7k9lMn0bV1cY2tA4sQ7wE8rZ4tA6sD9fG0";
+
+const createAccessToken = (username, permission) => {
+  const expiresIn = 10;
+  return jwt.sign({ username, permission }, secretKey, { expiresIn });
+};
+const createRefreshToken = (username, permission) => {
+  const expiresIn = 60 * 60 * 24 * 30;
+  return jwt.sign({ username, permission }, secretKey, { expiresIn });
+};
+
+app.post("/router_robotNest/signin", (req, res) => {
+  const { username, password } = req.body;
+
+  // Verify username and password here (for example, check against a database)
+  if (username === "admin" && password === "admin") {
+    const userInfo = {
+      username: "admin",
+      company: null,
+      department: null,
+      employeeID: null,
+      group: null,
+      local: true,
+      mail: null,
+      name: "admin",
+      password: "admin",
+      permission: "Developer",
+      title: null,
+    };
+
+    const accessToken = createAccessToken(
+      userInfo.username,
+      userInfo.permission
+    );
+    const refreshToken = createRefreshToken(
+      userInfo.username,
+      userInfo.permission
+    );
+    userInfo.access_token = accessToken;
+    userInfo.refresh_token = refreshToken;
+
+    res.json(userInfo);
+  } else {
+    res.status(401).json({ error: "Invalid username or password" });
+  }
+});
+
+app.post("/router_robotNest/refreshtoken", (req, res) => {
+  const { refresh_token } = req.body;
+  const userInfo = {
+    username: "admin",
+    permission: "Developer",
+  };
+
+  const accessToken = createAccessToken(userInfo.username, userInfo.permission);
+  const refreshToken = createRefreshToken(
+    userInfo.username,
+    userInfo.permission
+  );
+  const response = {};
+  response.access_token = accessToken;
+  response.refresh_token = refreshToken;
+  res.json(response);
+});
+
+const authenticateToken = (req, res, next) => {
+  const token = req.headers["token"];
+
+  if (!token) {
+    return res.status(401).json({ error: "Missing token in the header" });
+  }
+
+  jwt.verify(token, secretKey, (err, decoded) => {
+    // if (err) {
+    //   return res.status(403).json({ error: "Invalid token or token expired" });
+    // }
+    req.decoded = decoded;
+    next();
+  });
+};
+app.get("/router_robotNest/validate", authenticateToken, (req, res) => {
+  res.json({ username: "admin", permission: "Developer" });
+});
+
+app.post("/router_robotNest/dimmcontrol", authenticateToken, (req, res) => {
+  if (req.body.action === "ON") {
+    res.json({ dimmcontrol: "on" });
+  } else {
+    res.json({ dimmcontrol: "off" });
+  }
+});
+
+app.post(
+  "/router_ts5000/device_ts5000/reseterror",
+  authenticateToken,
+  (req, res) => {
+    // res.json({
+    //   code: "Fail",
+    // });
+    res.code(500).json({
+      code: "Fail",
+    });
+  }
+);
+
+app.get("/router_robotNest/controlstatus", (req, res) => {
+  const data = require("./mockControlStatus.json");
+  res.json(data);
+});
+
+app.get("/router_robotNest/sensor", (req, res) => {
+  const data = require("./mockSensor.json");
+  res.json(data);
+});
+
+const mockAllUserFilePath = path.join(__dirname, "mockAllUser.json");
+
+const updateMockAllUser = (updatedUserData) => {
+  const rawData = fs.readFileSync(mockAllUserFilePath, "utf-8");
+  const allUsers = JSON.parse(rawData);
+
+  // Find the user to be updated
+  const userIndex = allUsers.findIndex(
+    (user) => user.username === updatedUserData.username
+  );
+
+  // If user is found, update the user data
+  if (userIndex !== -1) {
+    allUsers[userIndex] = { ...allUsers[userIndex], ...updatedUserData };
+
+    // Write the updated data back to the JSON file
+    fs.writeFileSync(mockAllUserFilePath, JSON.stringify(allUsers, null, 2));
+  }
+};
+
+app.put("/router_robotNest/user", authenticateToken, (req, res) => {
+  const updatedUserData = req.body;
+
+  // Validate the updated user data
+  if (!updatedUserData.username || !updatedUserData.group) {
+    return res
+      .status(400)
+      .json({ error: "Missing username or group in the request body" });
+  }
+
+  // Update the user information in the mockAllUser.json file
+  updateMockAllUser(updatedUserData);
+
+  // Sending the updated user data as a response
+  res.code(400).json(updatedUserData);
+});
+app.put("/router_robotNest/usergroup", authenticateToken, (req, res) => {
+  const updatedUserData = req.body;
+  res.json(updatedUserData);
+});
+app.get("/router_robotNest/alluser", authenticateToken, (req, res) => {
+  const data = require("./mockAllUser.json");
+  res.json(data);
+});
+app.get("/router_robotNest/usergroup", authenticateToken, (req, res) => {
+  const data = require("./mockUserGroup.json");
+  res.json(data);
+});
+app.get("/router_robotNest/userevent", authenticateToken, (req, res) => {
+  const data = require("./mockUserEvent.json");
+  res.json(data);
+});
+app.put("/router_robotNest/userevent", authenticateToken, (req, res) => {
+  const webhook = req.query.webhook;
+  if (!webhook || webhook !== "webhook") {
+    return res
+      .status(400)
+      .json({ error: "Missing webhook in the request query" });
+  }
+  res.json({
+    text: "1",
+    status_code: 200,
+  });
 });
 
 app.post("/pp", (req, res) => {

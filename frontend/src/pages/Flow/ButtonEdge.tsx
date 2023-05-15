@@ -47,7 +47,6 @@ const CustomEdge = ({
   ) => {
     evt.stopPropagation();
 
-    console.log('remove edge', edgeId);
     dispatch(flowActions.setEdgeId(edgeId));
   };
 

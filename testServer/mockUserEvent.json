@@ -1,0 +1,1600 @@
+[
+  {
+    "_id": {
+      "$oid": "643fb2dcae8b6bfd215637fe"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:22:36.765Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fb2d4ae8b6bfd21560ff4"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:22:28.253Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fb260ae8b6bfd2153f9ca"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:20:32.587Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fb1b8ae8b6bfd215150f4"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:17:44.924Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643faf0cae8b6bfd2145b39c"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:06:20.147Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643faee8ae8b6bfd2145225d"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:05:44.387Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643faebdae8b6bfd214461a2"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:05:01.107Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643faeabae8b6bfd21440caf"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:04:43.536Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fadfcae8b6bfd2140f62b"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:01:48.236Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fada4ae8b6bfd213f8bb5"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:00:20.583Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fad9eae8b6bfd213f72eb"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T09:00:14.578Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fad29ae8b6bfd213d8199"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T08:58:17.234Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fad21ae8b6bfd213d5ea5"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T08:58:09.387Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fac70ae8b6bfd213a9283"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T08:55:12.654Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fac63ae8b6bfd213a5634"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T08:54:59.685Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fabc2ae8b6bfd2137b466"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T08:52:18.692Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fabb8ae8b6bfd213788ae"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T08:52:08.555Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643fab4cae8b6bfd2135cc67"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T08:50:20.898Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643f8ec8ae8b6bfd21b627a0"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-19T06:48:40.538Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "643e4f71ae8b6bfd218b4721"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-18T08:06:09.269Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643e4f64ae8b6bfd218b1202"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-18T08:05:56.008Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643e4db1ae8b6bfd218410cd"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": "{\"message\": \"OK\", \"device\": [{\"_id\": {\"$oid\": \"6423d7143a57aaa897b9aea9\"}, \"name\": \"device_ts5000\", \"connector\": \"ts5000\", \"controller\": {\"ip\": \"192.168.0.124\", \"port\": 2000}, \"locked\": true, \"receiver\": {\"ip\": \"192.168.0.124\", \"port\": 2001}, \"ref\": {\"TABLE_A\": \"device_kv8000_dimmfeeder_A\", \"TABLE_B\": \"device_kv8000_dimmfeeder_B\", \"CONVEYOR\": \"device_kv8000_Conveyor\"}, \"type\": \"controller\"}, {\"_id\": {\"$oid\": \"6423d7143a57aaa897b9aeab\"}, \"name\": \"device_kv8000_dimmfeeder_A\", \"connector\": \"kv8000\", \"controller\": {\"ip\": \"192.168.0.10\", \"port\": 8501}, \"locked\": true, \"receiver\": {\"ip\": \"192.168.0.10\", \"port\": 8501}, \"ref\": {\"TS5000\": \"device_ts5000\"}, \"subdevice\": \"dimmfeeder_A\", \"type\": \"controller\"}, {\"_id\": {\"$oid\": \"6423d7143a57aaa897b9aead\"}, \"name\": \"device_kv8000_dimmfeeder_B\", \"connector\": \"kv8000\", \"controller\": {\"ip\": \"192.168.0.10\", \"port\": 8501}, \"locked\": true, \"receiver\": {\"ip\": \"192.168.0.10\", \"port\": 8501}, \"ref\": {\"TS5000\": \"device_ts5000\"}, \"subdevice\": \"dimmfeeder_B\", \"type\": \"controller\"}, {\"_id\": {\"$oid\": \"6423d7143a57aaa897b9aeaf\"}, \"name\": \"device_kv8000_Conveyor\", \"connector\": \"kv8000\", \"controller\": {\"ip\": \"192.168.0.10\", \"port\": 8501}, \"locked\": true, \"receiver\": {\"ip\": \"192.168.0.10\", \"port\": 8501}, \"ref\": {\"TS5000\": \"device_ts5000\"}, \"subdevice\": \"conveyor\", \"type\": \"controller\"}, {\"_id\": {\"$oid\": \"6423d7143a57aaa897b9aeb1\"}, \"name\": \"device_kv8000_dimmfeeder\", \"connector\": \"kv8000\", \"controller\": {\"ip\": \"192.168.0.10\", \"port\": 8501}, \"locked\": true, \"receiver\": {\"ip\": \"192.168.0.10\", \"port\": 8501}, \"ref\": null, \"subdevice\": \"dimmfeeder\", \"type\": \"controller\"}, {\"_id\": {\"$oid\": \"6423d7143a57aaa897b9aeb3\"}, \"name\": \"device_kv8000_trayfeeder_A\", \"connector\": \"kv8000\", \"controller\": {\"ip\": \"192.168.0.12\", \"port\": 8501}, \"locked\": true, \"receiver\": {\"ip\": \"192.168.0.12\", \"port\": 8501}, \"ref\": null, \"subdevice\": \"trayfeeder_A\", \"type\": \"controller\"}, {\"_id\": {\"$oid\": \"6423d7143a57aaa897b9aeb5\"}, \"name\": \"device_kv8000_trayfeeder_B\", \"connector\": \"kv8000\", \"controller\": {\"ip\": \"192.168.0.12\", \"port\": 8501}, \"locked\": true, \"receiver\": {\"ip\": \"192.168.0.12\", \"port\": 8501}, \"ref\": null, \"subdevice\": \"trayfeeder_B\", \"type\": \"controller\"}, {\"_id\": {\"$oid\": \"6423d7143a57aaa897b9aeb7\"}, \"name\": \"device_kv8000_trayfeeder\", \"connector\": \"kv8000\", \"controller\": {\"ip\": \"192.168.0.12\", \"port\": 8501}, \"locked\": true, \"receiver\": {\"ip\": \"192.168.0.12\", \"port\": 8501}, \"ref\": null, \"subdevice\": \"trayfeeder\", \"type\": \"controller\"}, {\"_id\": {\"$oid\": \"643e4db0ae8b6bfd21840d9f\"}, \"name\": \"asdsaf77\", \"connector\": \"\", \"controller\": null, \"locked\": false, \"receiver\": {\"ip\": \"192.168.1.100\", \"port\": 3123}, \"ref\": {\"TS5000\": \"null\", \"TABLE_A\": \"null\", \"TABLE_B\": \"null\", \"CONVEYOR\": \"null\"}, \"subdevice\": null, \"type\": \"sensor\"}]}",
+    "timestamp": {
+      "$date": "2023-04-18T07:58:41.559Z"
+    },
+    "url": "/api/router_robotNest/device",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643e4cebae8b6bfd2180d78c"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-18T07:55:23.226Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643e4cdeae8b6bfd2180a3af"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "name=Robot_smoothness_check",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-18T07:55:10.687Z"
+    },
+    "url": "/api/router_robotNest/maintenance",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643e4cdcae8b6bfd21809b33"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "name=Timing_belt_check",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-18T07:55:08.558Z"
+    },
+    "url": "/api/router_robotNest/maintenance",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643e4cd9ae8b6bfd21808f1b"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "name=Corrosion_check",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-18T07:55:05.780Z"
+    },
+    "url": "/api/router_robotNest/maintenance",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643e4cd7ae8b6bfd21808635"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "name=Robot_internal_bolts_check",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-18T07:55:03.755Z"
+    },
+    "url": "/api/router_robotNest/maintenance",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643e4cd5ae8b6bfd21807d8f"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "name=Robot_internal_bolts_check",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-18T07:55:01.379Z"
+    },
+    "url": "/api/router_robotNest/maintenance",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643e4cd1ae8b6bfd21806f45"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "name=Robot_and_motor_bolts_check",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-18T07:54:57.919Z"
+    },
+    "url": "/api/router_robotNest/maintenance",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643e3ad5ae8b6bfd2134dfb4"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-18T06:38:13.963Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "11110635"
+  },
+  {
+    "_id": {
+      "$oid": "643ce795ae8b6bfd2106e24e"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:45.740Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce791ae8b6bfd2106cef5"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:41.925Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce78cae8b6bfd2106b638"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:36.521Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce78bae8b6bfd2106ae6f"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:35.048Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce789ae8b6bfd2106a562"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:33.135Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce787ae8b6bfd21069c50"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:31.243Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce785ae8b6bfd2106933a"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:29.245Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce783ae8b6bfd21068c7a"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:27.842Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce781ae8b6bfd210683e1"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:25.989Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce780ae8b6bfd21067c9b"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:24.353Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce77eae8b6bfd2106711b"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:22.007Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643ce77aae8b6bfd21066100"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-17T06:30:18.546Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643917e110f74f9589cd1651"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-14T09:07:45.385Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "6438f6b410f74f958924b232"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-14T06:46:12.422Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "6437a02abf57a01f784c4164"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T06:24:42.809Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "64379e77bf57a01f7843f236"
+    },
+    "method": "DELETE",
+    "permission": "Developer",
+    "request": "groupname=Delete",
+    "response": {
+      "message": "update 1 data"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T06:17:27.362Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "11110635"
+  },
+  {
+    "_id": {
+      "$oid": "64379e74bf57a01f7843e55e"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T06:17:24.822Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "11110635"
+  },
+  {
+    "_id": {
+      "$oid": "64379e74bf57a01f7843e562"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T06:17:24.818Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "11110635"
+  },
+  {
+    "_id": {
+      "$oid": "64376708bf57a01f7848c911"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T02:20:56.167Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6437657abf57a01f78423437"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T02:14:18.940Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643760c53a44219fe0f909e6"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "name=Robot_internal_bolts_check",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T01:54:13.519Z"
+    },
+    "url": "/api/router_robotNest/maintenance",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643760c23a44219fe0f8fd61"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "name=Robot_internal_bolts_check",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T01:54:10.924Z"
+    },
+    "url": "/api/router_robotNest/maintenance",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643760b73a44219fe0f8c599"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "name=Robot_internal_bolts_check",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T01:53:59.165Z"
+    },
+    "url": "/api/router_robotNest/maintenance",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643760b33a44219fe0f8b4e5"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T01:53:55.697Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643760af3a44219fe0f89eea"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T01:53:51.159Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643760ab3a44219fe0f88ddf"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T01:53:47.609Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643760a63a44219fe0f872b1"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T01:53:42.043Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643760a23a44219fe0f8616f"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T01:53:38.407Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "64375e643a44219fe0ed86b4"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T01:44:04.532Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "64374ae13a44219fe0a0f7c4"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-13T00:20:49.904Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "64366ec23a44219fe05b4aa7"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-12T08:41:38.775Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "11110635"
+  },
+  {
+    "_id": {
+      "$oid": "643667613a44219fe03f7dd4"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-12T08:10:09.791Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643666883a44219fe03c48c3"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-12T08:06:32.056Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "11110635"
+  },
+  {
+    "_id": {
+      "$oid": "643666703a44219fe03bef2d"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-12T08:06:08.280Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6436663c3a44219fe03b2b8e"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-12T08:05:16.511Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643666213a44219fe03ac4f0"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-12T08:04:49.239Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "643666213a44219fe03ac4f2"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-12T08:04:49.233Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6436170a3a44219fe00f1264"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-12T02:27:22.160Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6434bfe810b0e47a6e917c18"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-11T02:03:20.809Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6434bf3d10b0e47a6e8e99bb"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-11T02:00:29.569Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6434bf1010b0e47a6e8ddae0"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-11T01:59:44.955Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6434bed310b0e47a6e8cd384"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-11T01:58:43.633Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6434be8010b0e47a6e8b67fe"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-11T01:57:20.684Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6434bbbc10b0e47a6e7f4d33"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-11T01:45:32.913Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6434b8cf10b0e47a6e72da4f"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-11T01:33:03.130Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6434b52010b0e47a6e62ea5e"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-11T01:17:20.643Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6433c31410b0e47a6ec16557"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T08:04:36.611Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6433b7a510b0e47a6e9450c8"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T07:15:49.738Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "6433b78910b0e47a6e93edb5"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T07:15:21.642Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "6433b04810b0e47a6e7a9e85"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=true",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T06:44:24.657Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "6433b01710b0e47a6e79f408"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T06:43:35.669Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "6433ac2310b0e47a6e6c244c"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T06:26:43.288Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6433a91810b0e47a6e617df4"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T06:13:44.190Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "6433a1c710b0e47a6e45bbc2"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T05:42:31.292Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "6433a1b710b0e47a6e457f0b"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T05:42:15.057Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "6433a1b010b0e47a6e456454"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=False",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T05:42:08.072Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "6433a19910b0e47a6e4511bd"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T05:41:45.760Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "64339ff910b0e47a6e3ef31f"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T05:34:49.363Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "64339abc10b0e47a6e2b43a8"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=True",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T05:12:28.254Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "6433883810b0e47a6ee5c4de"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T03:53:28.963Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "Vision"
+  },
+  {
+    "_id": {
+      "$oid": "64335c0610b0e47a6e751545"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T00:44:54.355Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "64335c0110b0e47a6e7512cd"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T00:44:49.529Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "64335bf510b0e47a6e750dcb"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T00:44:37.671Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "64335bf110b0e47a6e750b60"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T00:44:33.402Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "64335beb10b0e47a6e7506f8"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-10T00:44:27.837Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "642fbaed10b0e47a6e00d8d7"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-07T06:40:45.865Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "642fb9f810b0e47a6efd3ebb"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-07T06:36:40.115Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "642fafdf10b0e47a6ed76926"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "activation=false",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-07T05:53:35.874Z"
+    },
+    "url": "/api/router_robotNest/event",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "642fac6810b0e47a6eca6b49"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-07T05:38:48.854Z"
+    },
+    "url": "/api/router_robotNest/user",
+    "username": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "642fac6810b0e47a6eca6b1c"
+    },
+    "method": "PUT",
+    "permission": "Developer",
+    "request": "",
+    "response": {
+      "message": "OK"
+    },
+    "timestamp": {
+      "$date": "2023-04-07T05:38:48.837Z"
+    },
+    "url": "/api/router_robotNest/usergroup",
+    "username": "admin"
+  }
+]

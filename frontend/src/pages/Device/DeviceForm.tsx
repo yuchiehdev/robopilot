@@ -1,15 +1,13 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useAppSelector, useAppDispatch } from '../../store';
-import {
-  fetchDeviceData,
-  fetchDeviceStatusData,
-  postAddDevice,
-} from '../../store/deviceSlice';
-import type { DeviceTypes } from '../../types';
+import { postAddDevice } from '../../store/deviceSlice';
+import type { DeviceType } from '../../types';
+import { getDeviceSetting } from '../../api/device';
 
 type DeviceFormProps = {
-  updateItem?: DeviceTypes;
+  updateItem?: DeviceType;
   toggleModal: () => void;
   setIsSpinnerShow: (value: boolean) => void;
 };
@@ -38,47 +36,60 @@ type DeviceInputs = {
 
 const DeviceForm: React.FC<DeviceFormProps> = (props) => {
   const { toggleModal, setIsSpinnerShow, updateItem } = props;
+  const device = useAppSelector((state) => state.device);
   const dispatch = useAppDispatch();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setFocus,
-    // formState: { errors },
-  } = useForm<DeviceInputs>();
+  let connectorOptions;
+  let needController = false;
+  let isKv8000 = false;
+
+  const { data: deviceSettingTemp } = useQuery<any, Error>({
+    queryKey: ['deviceSetting'],
+    queryFn: () => getDeviceSetting(),
+    onError: (err) => {
+      throw err;
+    },
+  });
+
+  const formattedDeviceData = useMemo(() => {
+    if (deviceSettingTemp) {
+      return {
+        ...deviceSettingTemp,
+        controller: Object.keys(deviceSettingTemp.conn_table),
+        sensor: [''],
+      };
+    }
+    return null;
+  }, [deviceSettingTemp]);
 
   useEffect(() => {
     setFocus('name');
   });
 
+  const { register, handleSubmit, watch, setFocus } = useForm<DeviceInputs>();
+
   const onSubmit: SubmitHandler<DeviceInputs> = (data) => {
     if (data.type === 'sensor') {
       delete data.controller;
     }
-    console.log(data);
     dispatch(postAddDevice(data));
-    dispatch(fetchDeviceData());
-    dispatch(fetchDeviceStatusData());
     toggleModal();
     setIsSpinnerShow(true);
   };
 
-  const device = useAppSelector((state) => state.device);
-  let connectorOptions;
-  let needController = false;
-  let isKv8000 = false;
-
-  if (watch('type') === 'controller') {
-    needController = true;
-    connectorOptions = device.setting?.controller.map((item) => (
-      <option key={item} value={item}>
+  if (watch('type') === 'sensor') {
+    needController = false;
+    const sensors = Object.entries(formattedDeviceData.conn_table)
+      .filter(([_, value]: any) => value.type === 'sensor')
+      .map(([key, _]) => key);
+    connectorOptions = sensors.map((item: any) => (
+      <option value={item} key={item}>
         {item}
       </option>
     ));
-  } else if (watch('type') === 'sensor') {
-    needController = false;
-    connectorOptions = device.setting?.sensor.map((item) => (
-      <option value={item} key={item}>
+  } else {
+    needController = true;
+    connectorOptions = formattedDeviceData?.controller?.map((item: any) => (
+      <option key={item} value={item}>
         {item}
       </option>
     ));
@@ -91,15 +102,16 @@ const DeviceForm: React.FC<DeviceFormProps> = (props) => {
   }
 
   const refOptions = (refDevice: string) => {
-    const connectorValue = device.setting?.action_mapping_table[refDevice];
+    const connectorValue = formattedDeviceData?.action_mapping_table[refDevice];
     const options = device.device.filter((d) => d.connector === connectorValue);
     const refOpt = options.map((item) => (
-      <option value={device.setting?.action_mapping_table.TS5000}>{item.name}</option>
+      <option value={formattedDeviceData?.action_mapping_table.TS5000}>
+        {item.name}
+      </option>
     ));
 
     return refOpt;
   };
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -112,6 +124,7 @@ const DeviceForm: React.FC<DeviceFormProps> = (props) => {
             type="text"
             id="name"
             defaultValue={updateItem?.name || ''}
+            autoComplete="off"
             {...register('name')}
             className="ml-6 rounded-md border-2 border-gray-80 px-2 text-base font-normal text-black focus:outline-wiwynn-blue"
           />
@@ -160,6 +173,7 @@ const DeviceForm: React.FC<DeviceFormProps> = (props) => {
             Controller-ip
             <input
               id="controller-ip"
+              autoComplete="off"
               defaultValue={updateItem?.controller?.ip || ''}
               className="ml-6 rounded-md border-2 border-gray-80  px-2 text-base font-normal text-black focus:outline-wiwynn-blue"
               {...register('controller.ip')}
@@ -182,6 +196,7 @@ const DeviceForm: React.FC<DeviceFormProps> = (props) => {
           Receiver-ip
           <input
             id="receiver-ip"
+            autoComplete="off"
             defaultValue={updateItem?.receiver?.ip || ''}
             className="ml-6 rounded-md border-2  border-gray-80 px-2 text-base font-normal text-black focus:outline-wiwynn-blue"
             {...register('receiver.ip')}
@@ -206,13 +221,13 @@ const DeviceForm: React.FC<DeviceFormProps> = (props) => {
             className="ml-6 rounded-md border-2 border-gray-80  px-2 text-base font-normal text-black"
             {...register('subdevice')}
           >
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="conveyor">conveyor</option>
+            {formattedDeviceData?.conn_table?.kv8000?.subdevice?.map((item: any) => {
+              return <option value={item}>{item}</option>;
+            })}
           </select>
         </label>
       )}
-      <section>
+      <section className="hidden">
         <p className="text-lg font-semibold">Reference</p>
         <section className="my-4 flex">
           <label className="text-md font-semibold" htmlFor="ref-ts5000">
@@ -224,8 +239,10 @@ const DeviceForm: React.FC<DeviceFormProps> = (props) => {
               {...register('ref.TS5000')}
             >
               <option value="null">null</option>
-              {device.setting?.action_mapping_table.TS5000 &&
-                refOptions(device.setting?.action_mapping_table.TS5000.toUpperCase())}
+              {formattedDeviceData?.action_mapping_table.TS5000 &&
+                refOptions(
+                  formattedDeviceData?.action_mapping_table.TS5000.toUpperCase(),
+                )}
             </select>
           </label>
           <label className="text-md pl-4 font-semibold" htmlFor="ref-table_a">
@@ -237,9 +254,9 @@ const DeviceForm: React.FC<DeviceFormProps> = (props) => {
               {...register('ref.TABLE_A')}
             >
               <option value="null">null</option>
-              {device.setting?.action_mapping_table.TABLE_A && (
-                <option value={device.setting?.action_mapping_table.TABLE_A}>
-                  {device.setting?.action_mapping_table.TABLE_A}
+              {formattedDeviceData?.action_mapping_table.TABLE_A && (
+                <option value={formattedDeviceData?.action_mapping_table.TABLE_A}>
+                  {formattedDeviceData?.action_mapping_table.TABLE_A}
                 </option>
               )}
             </select>
@@ -255,9 +272,9 @@ const DeviceForm: React.FC<DeviceFormProps> = (props) => {
               {...register('ref.TABLE_B')}
             >
               <option value="null">null</option>
-              {device.setting?.action_mapping_table.TABLE_B && (
-                <option value={device.setting?.action_mapping_table.TABLE_B}>
-                  {device.setting?.action_mapping_table.TABLE_B}
+              {formattedDeviceData?.action_mapping_table.TABLE_B && (
+                <option value={formattedDeviceData?.action_mapping_table.TABLE_B}>
+                  {formattedDeviceData?.action_mapping_table.TABLE_B}
                 </option>
               )}
             </select>
@@ -271,9 +288,9 @@ const DeviceForm: React.FC<DeviceFormProps> = (props) => {
               {...register('ref.CONVEYOR')}
             >
               <option value="null">null</option>
-              {device.setting?.action_mapping_table.CONVEYOR && (
-                <option value={device.setting?.action_mapping_table.CONVEYOR}>
-                  {device.setting?.action_mapping_table.CONVEYOR}
+              {formattedDeviceData?.action_mapping_table.CONVEYOR && (
+                <option value={formattedDeviceData?.action_mapping_table.CONVEYOR}>
+                  {formattedDeviceData?.action_mapping_table.CONVEYOR}
                 </option>
               )}
             </select>

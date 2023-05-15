@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-import { useEffect, useState, CSSProperties, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { useQuery } from '@tanstack/react-query';
-import BeatLoader from 'react-spinners/BeatLoader';
 import Panel from '../../components/Panel';
 import { useAppSelector } from '../../store';
 import { stringToUTCTimestamp } from '../../utils/dateToUTCTimestamp';
@@ -11,17 +11,7 @@ import DashboardTable from '../../components/DashboardTable';
 import LiquidChart from '../../components/LiquidChart';
 import { isFeatureEnabled } from '../../data/featureFlag';
 import { getEventByTime } from '../../api/event';
-// import { eventActions } from '../../store/eventQuerySlice';
 import type { EventType } from '../../types';
-
-const override: CSSProperties = {
-  display: 'block',
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  margin: '0 auto',
-};
 
 const tableCeil: string[] = [
   'Time',
@@ -41,6 +31,7 @@ const tableHeader: string[] = [
 ];
 
 const Troubleshooting = () => {
+  dayjs.extend(utc);
   const [events, setEvents] = useState<EventType[]>([]);
   const startDateTime = useAppSelector((state) => state.dashboard.startDateTime);
   const endDateTime = useAppSelector((state) => state.dashboard.endDateTime);
@@ -48,12 +39,13 @@ const Troubleshooting = () => {
     gte: stringToUTCTimestamp(startDateTime.date, startDateTime.time) || 0,
     lte: stringToUTCTimestamp(endDateTime.date, endDateTime.time) || 0,
   };
-  const { data, isLoading } = useQuery<EventType[], Error>(
+  const { data } = useQuery<EventType[], Error>(
     ['eventsByTime', startDateTime, endDateTime],
     () => getEventByTime(utcTimestamp),
     {
-      refetchInterval: 100000,
+      refetchInterval: 1000,
       keepPreviousData: true,
+      suspense: true,
     },
   );
   const formattedData = useMemo(() => {
@@ -71,7 +63,7 @@ const Troubleshooting = () => {
         return {
           ...item,
           id: $oid,
-          time: dayjs($date).format('YYYY-MM-DD HH:mm:ss'),
+          time: dayjs.utc($date).format('YYYY-MM-DD HH:mm:ss'),
           deactivatedTime: deactivate_timestamp
             ? dayjs(new Date(deactivate_timestamp.$date))
                 .format('YYYY/MM/DD HH:mm:ss')
@@ -90,7 +82,6 @@ const Troubleshooting = () => {
   useEffect(() => {
     setEvents(formattedData);
   }, [formattedData]);
-  console.log('Troubleshooting:', events);
 
   const extractErrorCode = () => {
     // get unique error code and count them
@@ -121,18 +112,6 @@ const Troubleshooting = () => {
   return (
     <Panel>
       <div className="relative flex h-full w-full flex-col gap-1">
-        {isLoading && (
-          <div className="absolute top-0 left-0 z-[40] h-full w-full bg-[rgba(232,232,232,0.9)]">
-            <BeatLoader
-              size={50}
-              color="rgb(142,211,0)"
-              loading
-              cssOverride={override}
-              aria-label="Loading Spinner"
-              data-testid="loader"
-            />
-          </div>
-        )}
         <div className="h-1/2 w-full">
           <section className="h-full w-full">
             <PeratoChart

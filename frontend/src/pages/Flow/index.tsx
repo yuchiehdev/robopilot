@@ -25,11 +25,6 @@ import NodeForm from './NodeForm';
 import './Flow.scss';
 import 'reactflow/dist/style.css';
 import {
-  fetchDeviceData,
-  fetchDeviceStatusData,
-  fetchDeviceSetting,
-} from '../../store/deviceSlice';
-import {
   fetchEntity,
   fetchEdge,
   postEntity,
@@ -72,9 +67,10 @@ const Flow = () => {
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
   const nodeTypes = useMemo(() => ({ customNode: CustomNodeComponent }), []);
   const dispatch = useAppDispatch();
-  const fetchedEntity = useAppSelector((state) => state.flow.entity);
-  const fetchedEdge = useAppSelector((state) => state.flow.edge);
-  const clickedEdgeId = useAppSelector((state) => state.flow.edgeId);
+  // set any only because removed flow state from redux
+  const fetchedEntity = useAppSelector((state: any) => state.flow.entity);
+  const fetchedEdge = useAppSelector((state: any) => state.flow.edge);
+  const clickedEdgeId = useAppSelector((state: any) => state.flow.edgeId);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
@@ -94,32 +90,9 @@ const Flow = () => {
   const first = useRef(true);
 
   useEffect(() => {
-    dispatch(fetchDeviceData());
-    dispatch(fetchDeviceStatusData());
     dispatch(fetchEntity());
     dispatch(fetchEdge());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   console.log(isOpenButtonAdd);
-  //   console.log(JSON.stringify(submitValueDrag) === '{}');
-  //   if (!isOpenButtonAdd) {
-  //     // delete entity if user close modal without submit
-  //             // setNodes((nds) => {
-  //       //   return nds.filter((node) => {
-  //       //     return node.data.entityName !== undefined;
-  //       //   });
-  //       // });
-  //       // setEdges((eds) => {
-  //       //   return eds.filter((edge) => {
-  //       //     return !edge.target.includes('Entity-') && !edge.source.includes('Entity-');
-  //       //   });
-  //       // });
-  //     if (JSON.stringify(submitValueDrag) !== '{}') {
-
-  //     }
-  //   }
-  // }, [isOpenDragAdd]);
 
   useEffect(() => {
     // fetch data from api and set to node and edge
@@ -130,7 +103,7 @@ const Flow = () => {
       }),
     );
 
-    fetchedEntity.forEach((item) => {
+    fetchedEntity.forEach((item: any) => {
       // fetch data from api and set to node
       const nodeAddFunc = {
         ...item,
@@ -149,11 +122,13 @@ const Flow = () => {
         return nds.concat(nodeAddFunc);
       });
     });
-    fetchedEdge.forEach((item) => {
+    fetchedEdge.forEach((item: any) => {
+      // set any only because removed flow state from redux
       // fetch data from api and set to edge
       setEdges((eds) => {
         // remove duplicate edge (somehow it will create duplicate edge)
-        const index = eds.findIndex((edge) => edge.id === item.id);
+        // set any only because removed flow state from redux
+        const index = eds.findIndex((edge: any) => edge.id === item.id);
         if (index !== -1) {
           eds.splice(index, 1);
         }
@@ -174,12 +149,10 @@ const Flow = () => {
       clientX: 0,
       clientY: 0,
     });
-    // console.log(nodes);
   }, [submitValue]);
 
   const updateHandler = () => {
     // pass to CustomNode component for open modal
-    dispatch(fetchDeviceSetting());
     toggleUpdate();
   };
 
@@ -198,8 +171,6 @@ const Flow = () => {
     }
     setNodes((nds) => {
       return nds.map((node) => {
-        // console.log(node);
-        // console.log(submitValueUpdate);
         if (node.id === submitValueUpdate.updateId) {
           node.data = {
             ...node.data,
@@ -244,9 +215,6 @@ const Flow = () => {
         return edge;
       }),
     );
-    // console.log(edges);
-    // console.log(nodes);
-    // console.log(submitValueDrag);
   }, [submitValueDrag]);
 
   useEffect(() => {
@@ -288,7 +256,6 @@ const Flow = () => {
       const targetIsPane = event.target.classList.contains('react-flow__pane');
       // check if the target is the pane and not a node
       if (targetIsPane) {
-        dispatch(fetchDeviceSetting());
         toggleDragAdd();
         let left = 0;
         let top = 0;
@@ -329,7 +296,6 @@ const Flow = () => {
           positionAbsolute: { x: -600, y: 174.92000000000002 },
           dragging: false,
         };
-        // console.log(newNodeDrag);
 
         setNodes((nds) => nds.concat(newNodeDrag));
 
@@ -402,19 +368,14 @@ const Flow = () => {
 
   const addIconClickHandler = () => {
     toggleButtonAdd();
-    dispatch(fetchDeviceSetting());
   };
 
   const onNodeClick = (e: any, node: any) => {
-    // console.log(nodes);
-    // console.log(edges);
     setUpdateNode(node);
   };
   const submitDelete = () => {
     setNodes((nds) =>
       nds.filter((node) => {
-        // console.log(node);
-        // console.log(deleteNode);
         return node.data.entityName !== deleteNode.name;
       }),
     );
@@ -427,8 +388,6 @@ const Flow = () => {
     dispatch(flowActions.setOptionShow('false'));
   };
   const submitHandler = () => {
-    // console.log(nodes);
-    // console.log(edges);
     const dataForNodeSubmit: {
       entityName: string;
       device: string;
@@ -497,7 +456,7 @@ const Flow = () => {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           onConnectStart={onConnectStart}
-          onConnectEnd={onConnectEnd}
+          // onConnectEnd={onConnectEnd}
           onNodeClick={onNodeClick}
           onPaneClick={onPaneClick}
           nodeTypes={nodeTypes}

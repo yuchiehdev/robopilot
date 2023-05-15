@@ -30,9 +30,11 @@ const TimeInterval = ({
   setEndTime,
 }: TimeIntervalProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const { domNode1, domNode2 }: any = useClickOutside(() => {
-    setShowDropdown(false);
-  });
+  const { domNode1, domNode2 } = useClickOutside<HTMLButtonElement, HTMLDivElement>(
+    () => {
+      setShowDropdown(false);
+    },
+  );
   dayjs.extend(customParseFormat);
 
   return (

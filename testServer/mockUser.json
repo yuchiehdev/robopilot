@@ -1,0 +1,13 @@
+{
+  "username": "admin",
+  "company": null,
+  "department": null,
+  "employeeID": null,
+  "group": null,
+  "local": true,
+  "mail": null,
+  "name": "admin",
+  "password": "admin",
+  "permission": "Developer",
+  "title": null
+}

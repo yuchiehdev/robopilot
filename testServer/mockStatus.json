@@ -1,65 +1,66 @@
 [
   {
-    "device": "device_ts5000",
-    "status": "Ready",
+    "device": "device_kv8000_dimmfeeder_A",
+    "status": "NotReady",
     "timestamp": {
-      "$date": "2023-03-17T00:31:54.446Z"
-    }
+      "$date": "2023-05-08T02:16:12.591Z"
+    },
+    "entity_name": "This includes Spanish words, Russian words, Chinese words, Japanese words, Korean words. Latin words, or Italian words."
   },
   {
-    "device": "device_kv8000_dimmfeeder_B",
-    "status": "Complete",
+    "device": "device_kv8000_trayfeeder_A",
+    "status": "NotReady",
     "timestamp": {
-      "$date": "2023-03-17T00:31:54.443Z"
-    }
+      "$date": "2023-05-08T02:16:11.652Z"
+    },
+    "entity_name": null
+  },
+  {
+    "device": "device_kv8000_trayfeeder_B",
+    "status": "NotReady",
+    "timestamp": {
+      "$date": "2023-05-08T02:16:11.661Z"
+    },
+    "entity_name": null
+  },
+  {
+    "device": "device_ts5000",
+    "status": "Disconnected",
+    "timestamp": {
+      "$date": "2023-05-08T02:16:11.222Z"
+    },
+    "entity_name": null
   },
   {
     "device": "device_kv8000_Conveyor",
     "status": "Ready",
     "timestamp": {
-      "$date": "2023-03-17T00:31:54.443Z"
-    }
-  },
-  {
-    "device": "device_kv8000_dimmfeeder_A",
-    "status": "NotReady",
-    "timestamp": {
-      "$date": "2023-03-17T00:31:54.451Z"
-    }
-  },
-  {
-    "device": "device_kv8000_trayfeeder_B",
-    "status": "Ready",
-    "timestamp": {
-      "$date": "2023-03-17T00:31:53.561Z"
-    }
+      "$date": "2023-05-08T02:16:11.624Z"
+    },
+    "entity_name": null
   },
   {
     "device": "device_kv8000_trayfeeder",
-    "status": "Ready",
+    "status": "NotReady",
     "timestamp": {
-      "$date": "2023-03-17T00:31:54.442Z"
-    }
-  },
-  {
-    "device": "device_kv8000_trayfeeder_A",
-    "status": "Ready",
-    "timestamp": {
-      "$date": "2023-03-17T00:31:53.562Z"
-    }
+      "$date": "2023-05-08T02:16:12.584Z"
+    },
+    "entity_name": null
   },
   {
     "device": "device_kv8000_dimmfeeder",
     "status": "NotReady",
     "timestamp": {
-      "$date": "2023-03-17T00:31:54.443Z"
-    }
+      "$date": "2023-05-08T02:16:12.584Z"
+    },
+    "entity_name": null
   },
   {
-    "device": "asdsaf77",
-    "status": "Disconnected",
+    "device": "device_kv8000_dimmfeeder_B",
+    "status": "NotReady",
     "timestamp": {
-      "$date": "2023-03-17T00:31:48.956Z"
-    }
+      "$date": "2023-05-08T02:16:11.624Z"
+    },
+    "entity_name": null
   }
 ]

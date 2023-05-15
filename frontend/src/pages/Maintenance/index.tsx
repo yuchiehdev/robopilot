@@ -1,97 +1,72 @@
-import { memo, useState, useCallback, useEffect, useRef } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { memo, useState, useEffect, useMemo, useRef, CSSProperties } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import BeatLoader from 'react-spinners/BeatLoader';
+import dayjs from 'dayjs';
 
-import Selector from '../../components/Selector';
-import SearchBar from '../../components/SearchBar';
-import EverythingFine from '../../components/IconText';
+import AUTHORIZATION from '../../data/authorization';
+import IconText from '../../components/IconText';
 import Paginator from '../../layout/Paginator';
+import Selector from '../../components/Selector';
+import TableHeader from '../../components/Table/TableHeader';
+import TagInput from '../../components/TagInput';
+import UpdateAt from '../../components/UpdateAt';
 import usePagination from '../../hooks/usePagination';
+import useSpinnerTimer from '../../hooks/useSpinnerTimer';
+import { getMaintenance } from '../../api/maintenance';
 import { useAppSelector, useAppDispatch } from '../../store';
 import {
   maintenanceActions,
-  fetchMaintenanceData,
   checkActiveItem,
   checkInactiveItem,
 } from '../../store/maintenanceSlice';
-import { ReactComponent as ArrowIcon } from '../../assets/icons/arrow-up.svg';
-import type { SortBy } from '../../store/maintenanceSlice';
+import { ReactComponent as ToggleIcon } from '../../assets/icons/chevron-right.svg';
+import type { MaintenanceType } from '../../types';
 
 type TableHeaderItem = {
   name: string;
   sortBy: string;
 };
 
+type tagObjType = {
+  category: string;
+  input: string;
+};
+
+const override: CSSProperties = {
+  display: 'block',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  margin: '0 auto',
+};
+
 const tableCeil: TableHeaderItem[] = [
-  { name: 'Inspection Point', sortBy: 'InspectionPoint' },
-  { name: 'Cycle', sortBy: 'Cycle' },
+  { name: 'Item', sortBy: 'Item' },
+  { name: 'Duration', sortBy: 'Duration' },
   { name: 'Last Check', sortBy: 'timeStamp' },
   { name: 'Active', sortBy: 'isActive' },
 ];
 
+const dropdownItems: TableHeaderItem[] = [
+  ...tableCeil,
+  { name: 'Search All', sortBy: 'searchAll' },
+];
+
+const refetchInterval = 1000 * 60 * 60 * 12;
+
 const Maintenance = () => {
-  const [searchInput, setSearchInput] = useState<string>('');
   const [clickCheckbox, setClickCheckbox] = useState<boolean>(false);
-  const inputRef = useRef<HTMLElement>();
-  const fetchDataInterval = useRef<NodeJS.Timeout>();
+  const [tagObjs, setTagObjs] = useState<tagObjType[]>([]);
+  const ref = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
-  const isSignIn = useAppSelector((state) => state.user.isSignIn);
-  const checkMaintenance = useAppSelector((state) => state.maintenance.checkMaintenance);
-  const sortStatus = useAppSelector((state) => state.maintenance.sortStatus);
+  const permission = useAppSelector((state) => state.user.permission);
+  const theme = useAppSelector((state) => state.user.theme);
   const viewRows = useAppSelector((state) => state.maintenance.viewRows);
-  const maintenanceCount = useAppSelector((state) => state.maintenance.maintenanceCount);
-  const fetchTime = useAppSelector((state) => state.maintenance.fetchTime);
-  const filterKeyword = useAppSelector((state) => state.maintenance.filterKeyword);
   const displayMaintenance = useAppSelector(
     (state) => state.maintenance.displayMaintenance,
   );
-
-  useEffect(() => {
-    let id: NodeJS.Timeout;
-    if (filterKeyword.length) {
-      dispatch(maintenanceActions.directFromAlarm(filterKeyword));
-      setSearchInput(filterKeyword);
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-      id = setTimeout(() => {
-        dispatch(maintenanceActions.clearFilterKeyword());
-      }, 1000 * 60 * 30);
-    } else dispatch(fetchMaintenanceData());
-
-    return () => {
-      dispatch(maintenanceActions.clearFilterKeyword());
-      if (id) {
-        clearTimeout(id);
-      }
-    };
-  }, [dispatch, filterKeyword]);
-
-  useEffect(() => {
-    if (searchInput === '') {
-      fetchDataInterval.current = setInterval(() => {
-        dispatch(maintenanceActions.clearFilterKeyword());
-        dispatch(fetchMaintenanceData());
-      }, 1000 * 60 * 60 * 12);
-    }
-    return () => clearInterval(fetchDataInterval.current);
-  }, [dispatch, searchInput]);
-
-  useEffect(() => {
-    if (clickCheckbox && checkMaintenance.status !== undefined) {
-      toast(checkMaintenance.message, {
-        autoClose: 1000,
-        type: checkMaintenance.status === 200 ? 'success' : 'error',
-      });
-      setTimeout(() => {
-        dispatch(fetchMaintenanceData());
-      }, 1000);
-
-      setTimeout(() => {
-        setClickCheckbox(false);
-      }, 2000);
-    }
-  }, [clickCheckbox, checkMaintenance.message, checkMaintenance.status, dispatch]);
+  const { showSpinner, setShowSpinner } = useSpinnerTimer(1.3);
 
   const {
     goPrev,
@@ -102,29 +77,53 @@ const Maintenance = () => {
     maxPage,
   } = usePagination(displayMaintenance, viewRows);
 
-  const sortHandler = useCallback(
-    (name: SortBy) => {
-      dispatch(maintenanceActions.sortData(name));
-    },
-    [dispatch],
-  );
+  const { data, refetch } = useQuery<MaintenanceType[], Error>({
+    queryKey: ['maintenance'],
+    queryFn: getMaintenance,
+    refetchInterval: 1000 * 60 * 60 * 12,
+    suspense: true,
+  });
 
-  const changeViewRowsHandler = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
-      dispatch(maintenanceActions.changeViewRows(Number(e.target.value)));
-    },
-    [dispatch],
-  );
+  const formattedData = useMemo(() => {
+    if (data) {
+      return data.map((item: MaintenanceType) => {
+        const {
+          _id: { $oid },
+          LastCheck: { $date },
+          active,
+          Item,
+        } = item;
+        const activation: 1 | 0 = active ? 1 : 0;
+        return {
+          ...item,
+          id: $oid,
+          time: dayjs($date).format('YYYY-MM-DD HH:mm:ss'),
+          showMsg: false,
+          isActive: activation,
+          InspectionPoint: Item.replaceAll('_', ' '),
+          timeStamp: $date,
+          showDescription: false,
+        };
+      });
+    }
+    return [];
+  }, [data]);
 
-  const filterEventHandler = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      e.preventDefault();
-      setSearchInput(e.target.value);
-      dispatch(maintenanceActions.setFilterKeyword(e.target.value));
-      dispatch(maintenanceActions.filterMaintenance(e.target.value));
-    },
-    [dispatch],
-  );
+  useEffect(() => {
+    dispatch(maintenanceActions.setMaintenances(formattedData));
+  }, [dispatch, formattedData]);
+
+  const showDescriptionHandler = (id: string) => {
+    dispatch(maintenanceActions.showDescription(id));
+  };
+
+  const changeViewRowsHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(maintenanceActions.changeViewRows(Number(e.target.value)));
+  };
+
+  const sortHandler = (name: string) => {
+    dispatch(maintenanceActions.sortData(name));
+  };
 
   const fixItemHandler = (deviceName: string, isActive: boolean) => {
     if (isActive) {
@@ -132,68 +131,49 @@ const Maintenance = () => {
     } else {
       dispatch(checkInactiveItem(deviceName));
     }
-    dispatch(fetchMaintenanceData());
+    setShowSpinner(true);
     setClickCheckbox(true);
-    setSearchInput('');
+    refetch();
+    setTimeout(() => {
+      setClickCheckbox(false);
+      setShowSpinner(false);
+    }, 1300);
   };
 
-  const clearSearchInputHandler = useCallback(() => {
-    setSearchInput('');
-    dispatch(maintenanceActions.clearFilterKeyword());
-    dispatch(fetchMaintenanceData());
-  }, [dispatch]);
-
   return (
-    <main className="relative flex overflow-scroll bg-white dark:bg-black">
-      <ToastContainer />
-      <section className="absolute top-3 left-16 mt-2">
-        <strong className="text-lg dark:text-white">Last Updated: </strong>
-        <span className="dark:text-white">{fetchTime}</span>
-        <span className="ml-3 text-sm text-gray-140 dark:text-white">
-          (updated each 12 hours)
-        </span>
-      </section>
-      {maintenanceCount > 0 ? (
-        <div className="flex w-full flex-col">
-          <section className="absolute right-14 top-3 inline-block h-10 w-min">
-            <SearchBar
-              searchInput={searchInput}
-              onChange={filterEventHandler}
-              onClear={clearSearchInputHandler}
-              ref={inputRef}
-            />
+    <main className="relative flex flex-col overflow-auto bg-white dark:bg-black">
+      {currentPageData.length > 0 ? (
+        <>
+          <section className="mx-auto flex h-auto w-11/12 items-center p-2">
+            <section className="flex w-1/3 flex-col">
+              <section>
+                <strong className="text-lg dark:text-white">Last Updated: </strong>
+                <UpdateAt
+                  queryKey={['maintenance']}
+                  queryFn={getMaintenance}
+                  refetchInterval={refetchInterval}
+                />
+              </section>
+              <p className="text-sm text-gray-100">(updated each 12 hours)</p>
+            </section>
+
+            <section className="w-2/3">
+              <TagInput
+                dropdownItems={dropdownItems}
+                tagObjs={tagObjs}
+                setTagObjs={setTagObjs}
+                forwardRef={ref}
+              />
+            </section>
           </section>
-          <table className="mx-auto mb-5 mt-20 w-11/12">
-            <thead>
-              <tr className="bg-gray-80 dark:bg-gray-220 ">
+
+          <table className="relative mx-auto mb-8 mt-5 w-11/12">
+            <thead className="sticky top-[-1px] z-20">
+              <tr className="border-2 border-table-border bg-table-bg text-table-font">
+                <th className="dark:bg-gray-220 dark:text-light-60">{null}</th>
                 {tableCeil.map((item) => {
                   return (
-                    <th
-                      key={item.name}
-                      className="pl-3 text-start text-sm leading-10 tracking-wide text-gray-220 dark:bg-gray-220 dark:text-light-60"
-                    >
-                      <button
-                        className="flex items-center"
-                        onClick={() => sortHandler(item.sortBy as SortBy)}
-                        onTouchEnd={() => sortHandler(item.sortBy as SortBy)}
-                      >
-                        <span>{item.name}</span>
-                        <span className="ml-2 inline-block w-3">
-                          <ArrowIcon
-                            className={
-                              sortStatus.orderBy === item.sortBy && !sortStatus.isDesc
-                                ? 'rotate-180'
-                                : ''
-                            }
-                            fill={
-                              sortStatus.orderBy === item.sortBy
-                                ? 'rgb(0,108,146)'
-                                : '#6f6f6f'
-                            }
-                          />
-                        </span>
-                      </button>
-                    </th>
+                    <TableHeader item={item} key={item.name} sortHandler={sortHandler} />
                   );
                 })}
                 <th className="text-start text-sm leading-10 tracking-wide text-gray-220 dark:bg-gray-220 dark:text-light-60">
@@ -202,44 +182,86 @@ const Maintenance = () => {
               </tr>
             </thead>
 
-            <tbody>
+            <tbody className="relative z-10">
               {currentPageData.map((item) => {
                 return (
-                  <tr
-                    key={item.id}
-                    className="event-row border-b border-light-120 text-sm leading-[3rem] dark:border-gray-200 dark:text-light-100"
-                  >
-                    <td className={`pl-3 ${item.active ? 'font-bold' : undefined}`}>
-                      {item.InspectionPoint}
-                    </td>
-                    <td className={`${item.active ? 'font-bold' : undefined}`}>
-                      {item.Cycle}
-                    </td>
-                    <td className={`${item.active ? 'font-bold' : undefined}`}>
-                      {item.time}
-                    </td>
-                    <td>
-                      {item.active ? (
-                        <span className="mr-2 flex h-6 w-20 items-center justify-center rounded-full bg-red font-bold text-white">
-                          ACTIVE
-                        </span>
-                      ) : (
-                        <span className="mr-2 flex h-6 w-20 items-center justify-center rounded-full bg-gray-80 font-bold text-white dark:text-black">
-                          inactive
-                        </span>
-                      )}
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        id={item.id}
-                        key={`${item.id}-${item.timeStamp}`}
-                        disabled={!isSignIn || clickCheckbox}
-                        className="scale-150 cursor-pointer focus-visible:outline-0"
-                        onClick={() => fixItemHandler(item.InspectionPoint, item.active)}
-                      />
-                    </td>
-                  </tr>
+                  <React.Fragment key={item.id}>
+                    <tr
+                      key={item.id}
+                      className="event-row border-2 border-table-border text-sm leading-[3rem] hover:cursor-pointer hover:bg-table-hover dark:border-gray-200 dark:text-light-100 dark:hover:text-black"
+                    >
+                      <td>
+                        <button
+                          className="z-50 rounded-full p-3 hover:bg-blue-exlight"
+                          onClick={() => showDescriptionHandler(item.id)}
+                        >
+                          <ToggleIcon
+                            fill={theme === 'dark' ? '#fff' : 'black'}
+                            className={`h-3 w-3 ${item.showDescription && 'rotate-90'}`}
+                          />
+                        </button>
+                      </td>
+                      <td
+                        className={`pl-3 ${item.active ? 'font-bold' : undefined}`}
+                        style={{
+                          width: '30%',
+                          lineHeight: '1.5rem',
+                          paddingRight: '0.5rem',
+                        }}
+                      >
+                        {item.InspectionPoint}
+                      </td>
+                      <td className={`${item.active ? 'font-bold' : undefined}`}>
+                        {item.Duration}
+                      </td>
+                      <td className={`${item.active ? 'font-bold' : undefined}`}>
+                        {item.time}
+                      </td>
+                      <td>
+                        {item.active ? (
+                          <span className="mr-2 flex h-6 w-20 items-center justify-center rounded-full bg-red font-bold text-white">
+                            ACTIVE
+                          </span>
+                        ) : (
+                          <span className="mr-2 flex h-6 w-20 items-center justify-center rounded-full bg-gray-80 font-bold text-white dark:text-black">
+                            Inactive
+                          </span>
+                        )}
+                      </td>
+                      <td>
+                        <input
+                          type="checkbox"
+                          id={item.id}
+                          key={`${item.id}-${item.timeStamp}`}
+                          disabled={
+                            !AUTHORIZATION.Assembly.update.has(permission) ||
+                            clickCheckbox
+                          }
+                          className="scale-150 cursor-pointer focus-visible:outline-0"
+                          onClick={() =>
+                            fixItemHandler(item.InspectionPoint, item.active)
+                          }
+                        />
+                      </td>
+                    </tr>
+
+                    {item.showDescription && (
+                      <tr className="border-2 border-table-border bg-table-hover dark:bg-gray-220 dark:text-gray-60">
+                        <td colSpan={7} className="w-full p-4 pl-10">
+                          <p className="text-sm">
+                            <span className="font-semibold">Description: </span>
+                            {item.Description}
+                          </p>
+                          {item['Refer to'] && (
+                            <p className="mt-1 text-sm">
+                              <span className="font-semibold">Refer to: </span>
+                              {item['Refer to']}
+                            </p>
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
                 );
               })}
             </tbody>
@@ -264,9 +286,22 @@ const Maintenance = () => {
               rows per page
             </section>
           </section>
-        </div>
+
+          {showSpinner && (
+            <div className="absolute top-0 left-0 h-full w-full bg-[rgba(0,0,0,0.7)]">
+              <BeatLoader
+                size={50}
+                color="rgb(142,211,0)"
+                loading
+                cssOverride={override}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            </div>
+          )}
+        </>
       ) : (
-        <EverythingFine text="No Maintenance Report" width=" w-32" />
+        <IconText text="No Maintenance Report" width=" w-32" />
       )}
     </main>
   );

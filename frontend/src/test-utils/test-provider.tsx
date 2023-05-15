@@ -9,9 +9,8 @@ import { initialAlarmState } from '../store/alarmSlice';
 import { initialUserState } from '../store/userSlice';
 import { initialControllerState } from '../store/controllerSlice';
 import { initialDeviceState } from '../store/deviceSlice';
-import { initialEventQueryState } from '../store/eventQuerySlice';
+import { initialEventQueryState } from '../store/eventSlice';
 import { initialSensorState } from '../store/sensorSlice';
-import { initialFlowSlice } from '../store/flowSlice';
 import { initialMaintenanceState } from '../store/maintenanceSlice';
 import { initialDashboardState } from '../store/dashboardSlice';
 import type { RootState, AppStore } from '../store';
@@ -31,7 +30,6 @@ export function renderWithProviders(
       device: initialDeviceState,
       eventQuery: initialEventQueryState,
       sensor: initialSensorState,
-      flow: initialFlowSlice,
       maintenance: initialMaintenanceState,
       dashboard: initialDashboardState,
     },

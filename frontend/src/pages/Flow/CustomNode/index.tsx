@@ -22,7 +22,8 @@ const CustomNode = ({ data }: CustomNodeProps) => {
   const dispatch = useAppDispatch();
 
   // optionShow is for other component to toggle option list
-  const optionShow = useAppSelector((state) => state.flow.optionShow);
+  // set any only because removed flow state from redux
+  const optionShow = useAppSelector((state: any) => state.flow.optionShow);
   useEffect(() => {
     if (optionShow === data.entityName) {
       setIsShow(true);
@@ -47,7 +48,7 @@ const CustomNode = ({ data }: CustomNodeProps) => {
     });
   };
 
-  const { domNode }: any = useClickOutsideSingle(() => {
+  const { domNode } = useClickOutsideSingle<HTMLUListElement>(() => {
     setIsShow(false);
   });
 

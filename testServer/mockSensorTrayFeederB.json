@@ -1,0 +1,79 @@
+{
+  "FEEDER_B_BUFFER": {
+    "name": "FEEDER_B_BUFFER",
+    "value": 0,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  },
+  "FEEDER_B_IN_REMAIN": {
+    "name": "FEEDER_B_IN_REMAIN",
+    "value": 3,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  },
+  "FEEDER_B_IN_HEIGHT": {
+    "name": "FEEDER_B_IN_HEIGHT",
+    "value": 0.0,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  },
+  "FEEDER_B_OUT_EMPTY": {
+    "name": "FEEDER_B_OUT_EMPTY",
+    "value": 1,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  },
+  "PLC_FEEDER_AUTO_READY": {
+    "name": "PLC_FEEDER_AUTO_READY",
+    "value": 0,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  },
+  "FEEDER_B_IN_FEW": {
+    "name": "FEEDER_B_IN_FEW",
+    "value": 1,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  },
+  "FEEDER_B_IN_EMPTY": {
+    "name": "FEEDER_B_IN_EMPTY",
+    "value": 1,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  },
+  "FEEDER_B_OUT_ALMOST": {
+    "name": "FEEDER_B_OUT_ALMOST",
+    "value": 0,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  },
+  "FEEDER_B_OUT_FULL": {
+    "name": "FEEDER_B_OUT_FULL",
+    "value": 0,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  },
+  "FEEDER_B_IN_WITHDRAW": {
+    "name": "FEEDER_B_IN_WITHDRAW",
+    "value": 0,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  },
+  "FEEDER_B_OUT_RECEIVE": {
+    "name": "FEEDER_B_OUT_RECEIVE",
+    "value": 0,
+    "timestamp": {
+      "$date": "2023-04-20T03:05:23.867Z"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "_id": {
+      "$oid": "641a709c8286c3659f15528d"
+    },
+    "GroupName": "test_v",
+    "AccessLevel": "Engineer",
+    "Description": "123",
+    "teams_url": "https://wts.wiwynn.com/cltcms/play-index-home.do"
+  },
+  {
+    "_id": {
+      "$oid": "641d4aecc077b7ef20cdbbf7"
+    },
+    "GroupName": "Test-Tray-G1",
+    "AccessLevel": "Engineer",
+    "Description": "Houston, we have a problem..."
+  },
+  {
+    "_id": {
+      "$oid": "64212f52db831f3a2b06b30b"
+    },
+    "GroupName": "test36",
+    "Description": "12345611",
+    "AccessLevel": "Engineer"
+  }
+]

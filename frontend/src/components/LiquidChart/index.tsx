@@ -60,7 +60,7 @@ const LiquidChart = ({
     <div
       className="flex items-center justify-center"
       ref={gaugeRef}
-      style={{ height: chartHeight, width: chartWidth }}
+      style={{ height: '100%', width: '100%' }}
     >
       {width && height && (
         <LiquidFillGauge

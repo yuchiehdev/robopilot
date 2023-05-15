@@ -37,7 +37,7 @@ export const handlers = [
   ),
 
   rest.get('http://localhost/router_robotNest/signin', (req, res, ctx) => {
-    const isAuth = sessionStorage.getItem('isAuth');
+    const isAuth = localStorage.getItem('isAuth');
 
     if (!isAuth) {
       return res(

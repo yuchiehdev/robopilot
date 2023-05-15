@@ -4,3 +4,6 @@ label.signin-method {
     border-bottom: 3px solid rgb(0, 108, 146);
   }
 }
+.signin-method * {
+  user-select: none;
+}

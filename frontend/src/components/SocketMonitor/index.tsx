@@ -21,10 +21,12 @@ const SocketMonitor = () => {
   );
 
   return isImgSent ? (
-    socketImg
+    <section className="flex h-full flex-col items-center justify-center">
+      {socketImg}
+    </section>
   ) : (
     <section className="flex h-full flex-col items-center justify-center gap-10 text-base">
-      <h1>wait for socket data...</h1>
+      <h1>waiting for data...</h1>
       <ScaleLoader
         color="rgb(142,211,0)"
         height={60}

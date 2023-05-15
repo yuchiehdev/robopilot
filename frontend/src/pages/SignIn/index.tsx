@@ -1,64 +1,107 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { ToastContainer, toast } from 'react-toastify';
-
-import { signIn } from '../../store/userSlice';
+import { ErrorMessage } from '@hookform/error-message';
+import { userAction } from '../../store/userSlice';
+import { signIn } from '../../api/signIn';
 import { useAppSelector, useAppDispatch } from '../../store';
 import wiwynnLogo from '../../assets/icons/wiwynn_logo_blue.svg';
+import type { SignInInput, SignInResponse } from '../../api/signIn';
 import './style.scss';
+import AUTHORIZATION from '../../data/authorization';
+import { useSessionExpiration } from '../../hooks/useSessionExpiration';
 
+const authList: Record<string, Record<string, Set<string>>> = AUTHORIZATION;
 type SignInInputs = {
   username: string;
   password: string;
 };
 
-const validPattern = /^[a-zA-Z0-9]+$/;
-
 const registerOption = {
   ldap: {
-    required: true,
+    account: {
+      required: 'This input is required.',
+    },
+    password: {
+      required: 'This input is required.',
+    },
   },
   local: {
-    required: true,
-    pattern: {
-      value: validPattern,
-      message: 'password can contain only letters and numbers',
+    account: {
+      required: 'This input is required.',
+    },
+    password: {
+      required: 'This input is required.',
     },
   },
 };
 
 const SignIn = () => {
+  const location = useLocation();
   const [signInMode, setSignInMode] = useState<'ldap' | 'local'>('ldap');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const isSignIn = useAppSelector((state) => state.user.isSignIn);
-  const errorMsg = useAppSelector((state) => state.user.errorMsg);
+  const permission = useAppSelector((state) => state.user.permission);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const signInMutation = useMutation<SignInResponse, Error, SignInInput>({
+    mutationFn: signIn,
+    onSuccess: (result) => {
+      dispatch(
+        userAction.setUserRole({
+          permission: result.permission,
+          name: result.username,
+        }),
+      );
+      dispatch(userAction.setSignInStatus(true));
+      resetField('password');
+    },
+    onError: () => {
+      resetField('username');
+      resetField('password');
+      setErrorMsg('Invalid username or password');
+    },
+  });
 
   const {
     register,
     handleSubmit,
     resetField,
     formState: { errors },
-  } = useForm<SignInInputs>();
+    reset,
+    setFocus,
+  } = useForm<SignInInputs>({
+    criteriaMode: 'all',
+  });
 
   const onSubmit: SubmitHandler<SignInInputs> = (data) => {
-    dispatch(signIn({ data, mode: signInMode }));
-    resetField('password');
+    signInMutation.mutate({ data, mode: signInMode });
   };
 
+  const handleTokenRemoved = () => {
+    dispatch(userAction.setSignInStatus(false));
+    dispatch(userAction.setUserRole({ permission: '', name: '' }));
+    navigate('/signin', { state: { from: location.pathname } });
+  };
+  const resetTimer = useSessionExpiration(handleTokenRemoved, undefined, isSignIn);
   useEffect(() => {
-    if (isSignIn) {
+    // reset form when switch between ldap and local
+    setFocus('username');
+    reset();
+  }, [signInMode, reset]);
+  useEffect(() => {
+    const from = location.state?.from || '/assembly';
+    if (from === '/signin') navigate('/assembly');
+    const captalizedFrom = from.charAt(1).toUpperCase() + from.slice(2);
+    if (isSignIn && authList[captalizedFrom]?.read.has(permission)) {
       resetField('username');
-      navigate('/dashboard');
-    } else if (!isSignIn && errorMsg.length) {
-      toast.error(errorMsg, { autoClose: 2500 });
+      navigate(from);
     }
-  }, [isSignIn, errorMsg, navigate, resetField]);
-
+    resetTimer();
+  }, [isSignIn, errorMsg, navigate, resetField, location.state, permission, resetTimer]);
   return (
-    <main className="flex flex-col overflow-scroll bg-white dark:bg-black">
-      <ToastContainer />
+    <main className="flex flex-col items-center overflow-auto bg-white dark:bg-black">
       <section className="container mt-5 flex h-full w-full flex-col items-center justify-center p-5">
         <img src={wiwynnLogo} alt="Wiwynn Logo" className="mx-1/2 mb-14 w-48" />
         <section className="mb-8 flex h-12 w-full justify-between text-2xl font-semibold tracking-wide text-gray-180 md:w-1/2 lg:w-1/3">
@@ -108,14 +151,24 @@ const SignIn = () => {
               id="username"
               type="text"
               className={`w-full border-b-2 bg-light-120 px-1 text-base font-normal text-black focus:outline-none dark:bg-gray-220 dark:text-white ${
-                errors.username ? 'border-red' : 'border-black'
+                errors.username || errorMsg ? 'border-red' : 'border-black'
               }`}
-              {...register('username', registerOption.ldap)}
+              {...register('username', registerOption[signInMode].account)}
             />
           </label>
-          {errors.username && (
-            <span className="m-0 mt-[-2rem] text-red">{errors.username.message}</span>
-          )}
+          <ErrorMessage
+            errors={errors}
+            name="username"
+            render={({ messages }) => {
+              return messages
+                ? Object.entries(messages).map(([type, message]) => (
+                    <p className="errorMessage m-0 mt-[-2rem]" key={type}>
+                      {message}
+                    </p>
+                  ))
+                : null;
+            }}
+          />
           <label
             htmlFor="password"
             className="flex w-full flex-col bg-light-120 text-lg font-semibold dark:bg-gray-220 dark:text-white"
@@ -127,14 +180,27 @@ const SignIn = () => {
               id="password"
               type="password"
               className={`w-full border-b-2 bg-light-120 px-1 text-base font-normal text-black focus:outline-none dark:bg-gray-220 dark:text-white ${
-                errors.password ? 'border-red' : 'border-black'
+                errors.password || errorMsg ? 'border-red' : 'border-black'
               }`}
-              {...register('password', registerOption.ldap)}
+              {...register('password', registerOption[signInMode].password)}
             />
           </label>
-          {errors.password && (
-            <span className="m-0 mt-[-2rem] text-red">{errors.password.message}</span>
-          )}
+          <ErrorMessage
+            errors={errors}
+            name="password"
+            render={({ messages }) => {
+              return messages
+                ? Object.entries(messages).map(([type, message]) => (
+                    <p className="errorMessage m-0 mt-[-2rem]" key={type}>
+                      {message}
+                    </p>
+                  ))
+                : null;
+            }}
+          />
+          <p className={`errorMessage m-0 mt-[-2rem] ${errorMsg ? 'block' : 'hidden'}`}>
+            {errorMsg}
+          </p>
           <button
             type="submit"
             className="mt-4 w-full rounded-full bg-wiwynn-blue py-1 text-lg font-semibold text-white"

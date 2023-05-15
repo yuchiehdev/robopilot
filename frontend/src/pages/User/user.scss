@@ -92,8 +92,45 @@ input[id='radio-3'] {
   transition: 0.25s ease-out;
 }
 
-// @media (max-width: 700px) {
-//   .tabs {
-//     transform: scale(0.6);
-//   }
+.errorMessage {
+  color: #bf1650;
+}
+.errorMessage::before {
+  content: '⚠ ';
+}
+.formInput {
+  //ml-6 rounded-md border-[0.13rem] border-[#dadce4] p-2 px-4 text-base font-normal text-black focus:outline-wiwynn-blue
+  margin-left: 1.5rem;
+  border-radius: 0.5rem;
+  border: 0.13rem solid #dadce4;
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #000;
+  transition: 0.15s ease-in;
+  // &:focus {
+  //   outline: none;
+  //   border-color: rgb(0, 108, 146);
+  // }
+  &:is(input).formInput:focus {
+    outline: none;
+    border-color: rgb(0, 108, 146);
+  }
+}
+// :is(div).formInput {
+//   background-color: #bf1650;
 // }
+
+.inputFullWidth {
+  width: calc(100% - 1.5rem);
+}
+
+.radialIcon {
+  background-image: radial-gradient(circle at center, white, rgba(142, 211, 0, 0.01));
+}
+
+.divOption {
+  top: calc(100% - 0.25em);
+  z-index: 1;
+  background-color: white;
+}

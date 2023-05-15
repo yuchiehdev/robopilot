@@ -46,6 +46,7 @@ export const postEntity = createAsyncThunk(
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          token: localStorage.getItem('JWToken') || '',
         },
         body: JSON.stringify(input),
       });
@@ -65,6 +66,7 @@ export const postEdge = createAsyncThunk(
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          token: localStorage.getItem('JWToken') || '',
         },
         body: JSON.stringify(input),
       });
@@ -109,8 +111,6 @@ export const flowSlice = createSlice({
               devicetype = 'Transfer';
           }
           return {
-            // eslint-disable-next-line no-underscore-dangle
-            // id: item._id?.$oid,
             id: item.entityName,
             type: 'customNode',
             data: {
@@ -138,9 +138,7 @@ export const flowSlice = createSlice({
       .addCase(fetchEdge.fulfilled, (state, action) => {
         state.edge = action.payload.map((item: EdgeType) => {
           return {
-            // eslint-disable-next-line no-underscore-dangle
             id: item._id?.$oid,
-            // id: item.id,
             source: item.source,
             target: item.target,
             type: 'buttonedge',

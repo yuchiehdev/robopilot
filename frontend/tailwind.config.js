@@ -35,20 +35,26 @@ module.exports = {
         dark: '#162848',
         gray: '#83879b',
         black: '#00090B',
+        transparent: '#a9d6e5',
+        exlight: '#e2eafc',
       },
       green: {
         DEFAULT: '#06bcc1',
+        transparent: '#d0efb1',
         bright: '#4bf330',
         dark: 'rgb(14,131,80)',
+        black: '#283618',
       },
       yellow: {
         DEFAULT: '#ffbe0b',
+        transparent: '#f4de90',
         dark: '#f6b500',
       },
       red: {
         DEFAULT: '#e5446d',
         bright: '#f33030',
         dark: '#a71e34',
+        transparent: 'rgba(217,107,135,0.6)',
       },
       light: {
         60: '#fdfdfd',
@@ -56,7 +62,6 @@ module.exports = {
         100: '#ebebeb',
         120: '#eaeaea',
       },
-
       gray: {
         60: { DEFAULT: '#d8d8d8', transparent: 'rgba(216, 216, 216, 0.2)' },
         80: '#bbbbbb',
@@ -70,17 +75,24 @@ module.exports = {
       },
     },
     screens: {
+      zi: { raw: '(max-height: 800px) and (min-width:1024px)' },
+      gi: { raw: '(min-height:800px) and (max-height: 2000px) and (min-width:1024px)' },
       ei: '800px',
       th: '1000px',
+      status: '1200px',
       ...defaultTheme.screens,
     },
     extend: {
+      fill: (theme) => theme('colors'),
       gridTemplateRows: {
         10: 'repeat(10, minmax(0, 1fr))',
         layout: '200px minmax(900px, 1fr) 100px',
       },
       gridRow: {
         'span-8': 'span 8 / span 8',
+      },
+      matrix3d: {
+        1: { transform: 'matrix3d(1, 0, 0, 0, 0, .6, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)' },
       },
       boxShadow: {
         'inner-2': 'inset 0px 0px 50px 0px #f0f0f0',
@@ -94,10 +106,61 @@ module.exports = {
           '0%': { opacity: 1, transform: 'translateY(0)' },
           '100%': { opacity: 0, transform: 'translateY(100vh)' },
         },
+        bounceY: {
+          '0%': {
+            animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
+            transform: 'translate(22%, -10%)',
+          },
+          '50%': {
+            animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
+            transform: 'translate(0)',
+          },
+          '100%': {
+            animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
+            transform: 'translate(22%, -10%)',
+          },
+        },
+        bounceZ: {
+          '0%': {
+            animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
+            transform: 'translate(26%, 17%)',
+          },
+          '50%': {
+            animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
+            transform: 'translate(0)',
+          },
+          '100%': {
+            animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
+            transform: 'translate(26%, 17%)',
+          },
+        },
+        shake: {
+          '0%': {
+            transform: 'translate(3px, 0)',
+          },
+          '50%': {
+            transform: 'translate(-3px, 0)',
+          },
+          '100%': {
+            transform: 'translate(0, 0)',
+          },
+        },
+        spinLeft: {
+          from: {
+            transform: 'rotate(0deg)',
+          },
+          to: {
+            transform: 'rotate(-360deg)',
+          },
+        },
       },
       animation: {
         moveInBottom: 'moveInBottom 0.5s ease-out;',
         moveOutBottom: 'moveOutBottom 0.5s ease-out backwards;',
+        bounceY: 'bounceY 1s infinite;',
+        bounceZ: 'bounceZ 1s infinite;',
+        shake: 'shake 150ms 2 linear',
+        spinLeft: 'spinLeft 1s linear infinite;',
       },
       backgroundImage: {
         dot: 'radial-gradient(#a8c3f1 8% transparent 0)',

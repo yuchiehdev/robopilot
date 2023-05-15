@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import 'chartjs-adapter-luxon';
 import { StreamingPlugin, RealTimeScale } from 'chartjs-plugin-streaming';
 import {
   Chart as ChartJS,
@@ -11,9 +10,10 @@ import {
   Legend,
   Tooltip,
 } from 'chart.js';
-// import { PPR, PPL, PRESS, VISCAL } from '../../data/fetchUrl';
-import deviation, { mean } from '../../utils/standardDeviation';
+import 'chartjs-adapter-luxon';
+
 import DDL from '../DropDownList';
+import deviation, { mean } from '../../utils/standardDeviation';
 import mockControlData from '../../data/mockControlData.json';
 
 ChartJS.register(
@@ -31,14 +31,14 @@ ChartJS.register(
 // 2023-02-08 fetch two kind of data, one is for deviation needed to be refresh per ten minutes, another is for current data needed to be refresh per second
 
 const StreamChart = () => {
-  const listitems = ['TrayA', 'TrayB', 'Press', 'Calibration'];
+  const listItems = ['TrayA', 'TrayB', 'Press', 'Calibration'];
   const [TIMEPPR, setTIMEPPR] = useState<number[]>([]);
   const [TIMEPPL, setTIMEPPL] = useState<number[]>([]);
   const [TIMEPRESS, setTIMEPRESS] = useState<number[]>([]);
   const [TIMEVISCAL, setTIMEVISCAL] = useState<number[]>([]);
   const [selected, setSelected] = useState('TrayA');
   const [checked, setChecked] = useState([
-    selected === listitems[0],
+    selected === listItems[0],
     false,
     false,
     false,
@@ -137,7 +137,6 @@ const StreamChart = () => {
             fetch('http://localhost:5003/test')
               .then((res) => res.json())
               .then((value) => {
-                console.log(value);
                 chart.data.datasets.forEach((dataset) => {
                   if (dataset.label === 'UCL') {
                     dataset.data.push({
@@ -174,7 +173,7 @@ const StreamChart = () => {
         <DDL
           setSelected={setSelected}
           selected={selected}
-          listitems={listitems}
+          listItems={listItems}
           checked={checked}
           setChecked={setChecked}
         />

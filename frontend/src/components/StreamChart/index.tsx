@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { FcComboChart } from 'react-icons/fc';
 import { Line } from 'react-chartjs-2';
-import 'chartjs-adapter-luxon';
 import { StreamingPlugin, RealTimeScale } from 'chartjs-plugin-streaming';
 import {
   Chart as ChartJS,
@@ -13,13 +12,14 @@ import {
   Legend,
   Tooltip,
 } from 'chart.js';
-// import { PPR, PPL, PRESS, VISCAL } from '../../data/fetchUrl';
 import dayjs from 'dayjs';
-import deviation, { mean } from '../../utils/standardDeviation';
+import 'chartjs-adapter-luxon';
+
 import DDL from '../DropDownList';
+import deviation, { mean } from '../../utils/standardDeviation';
 import mockControlData from '../../data/mockControlData.json';
-import './streamChart.scss';
 import { useAppSelector } from '../../store';
+import './streamChart.scss';
 
 ChartJS.register(
   StreamingPlugin,
@@ -59,7 +59,6 @@ const StreamChart = () => {
   ];
   const deviationTenMin = useAppSelector((state) => state.eventQuery.deviation);
   const meanTenMin = useAppSelector((state) => state.eventQuery.mean);
-  console.log(meanTenMin);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dataForTestingNA = [
     '31.1',
@@ -337,7 +336,6 @@ const StreamChart = () => {
               .then((res) => {
                 // if res is null or undefined, don't show error
 
-                // console.log(res);
                 if (res.status === 404) {
                   return 'N/A';
                 }
@@ -393,7 +391,7 @@ const StreamChart = () => {
         <DDL
           setSelected={setSelected}
           selected={selected}
-          listitems={listitems}
+          listItems={listitems}
           icon={<FcComboChart className="mr-[0.3rem]" size="20" />}
           styleCSS="py-[0.4rem] px-3 text-sm font-semibold border-[#F3F3F3] shadow-sm rounded-md"
           arrowColor="#8a8a8a"

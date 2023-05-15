@@ -13,7 +13,7 @@ import {
 } from 'chart.js';
 import { Chart, getElementAtEvent } from 'react-chartjs-2';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { eventActions } from '../../store/eventQuerySlice';
+import { eventActions } from '../../store/eventSlice';
 import NoData from '../IconText';
 import { ReactComponent as LoadCheckIcon } from '../../assets/icons/loadCheck.svg';
 
@@ -38,14 +38,14 @@ const PeratoChart = ({ eventData, eventErrorName, hasEvent }: peratoChartProps) 
   const filterTag = useAppSelector((state) => state.eventQuery.filterTag);
   const dispatch = useAppDispatch();
 
-  let label = [];
+  let label: string[] = [];
   let data: (string | number)[] = [];
   if (eventData.length < 10) {
     // only for making sure the chart has 10 data points
     let i = 0;
     while (i < 10) {
       if (i < eventData.length) {
-        label.push(eventData[i][0]);
+        label.push(`# ${eventData[i][0]}`);
         data.push(eventData[i][1]);
       } else {
         label.push('');
@@ -54,7 +54,7 @@ const PeratoChart = ({ eventData, eventErrorName, hasEvent }: peratoChartProps) 
       i += 1;
     }
   } else {
-    label = eventData.map((el) => el[0]);
+    label = eventData.map((el) => `# ${el[0]}`);
     data = eventData.map((el) => el[1]);
   }
 
@@ -149,6 +149,16 @@ const PeratoChart = ({ eventData, eventErrorName, hasEvent }: peratoChartProps) 
     },
     scales: {
       x: {
+        // ticks: {
+        //   callback: (value: number | string, index: number, values: any[]) => {
+        //     console.log('Value:', value); // The current tick value or label
+        //     console.log('Index:', index); // The index of the current tick
+        //     console.log('Values:', values); // The array containing all tick values or labels
+
+        //     // You can modify the label as needed
+        //     return `${value}`;
+        //   },
+        // } as any,
         title: {
           display: true,
           text: 'Error Code',

@@ -78,8 +78,7 @@ const QueryTest = () => {
   useEffect(() => {
     setEvents(formattedData);
   }, [formattedData]);
-  console.log(data);
-  console.log(events);
+
   return (
     <div>
       <h1>QueryTest</h1>

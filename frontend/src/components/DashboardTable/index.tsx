@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import NoData from '../IconText';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { eventActions } from '../../store/eventQuerySlice';
+import { eventActions } from '../../store/eventSlice';
 
 type DashboardTableProps = {
   page: string;
@@ -38,8 +38,8 @@ const DashboardTable = ({
     }
   };
   const filteredTagData = (tag: string, data: any[]) => {
-    return data.filter((item) => {
-      if (item.errorCode) return item.errorCode.toString().includes(tag);
+    return data?.filter((item) => {
+      if (item?.errorCode) return item.errorCode.toString().includes(tag);
       return item;
     });
   };
@@ -89,17 +89,19 @@ const DashboardTable = ({
           </thead>
           <tbody>
             {!hasEvent ? (
-              <div className="absolute top-0 left-0 z-10 flex h-[95%] w-full items-center justify-center bg-[rgba(255,255,255,0.8)]">
-                <NoData
-                  text="No Data"
-                  width="w-14"
-                  color="text-[#c9c9c9]"
-                  gap="mt-4 mb-2"
-                  textSize="text-3xl"
-                />
-              </div>
+              <tr className="absolute top-0 left-0 z-10 flex h-[95%] w-full items-center justify-center bg-[rgba(255,255,255,0.8)]">
+                <td colSpan={tableCeil.length + 1}>
+                  <NoData
+                    text="No Data"
+                    width="w-14"
+                    color="text-[#c9c9c9]"
+                    gap="mt-4 mb-2"
+                    textSize="text-3xl"
+                  />
+                </td>
+              </tr>
             ) : null}
-            {filteredTagData(filterTag.perato, tableData).map((event) => (
+            {filteredTagData(filterTag.perato, tableData)?.map((event) => (
               <tr
                 className="border-2 border-table-border hover:cursor-pointer hover:bg-table-hover"
                 onClick={() => handleRowClick(event.id, event['S/N'])}

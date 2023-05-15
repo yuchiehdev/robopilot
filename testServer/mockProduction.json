@@ -1,0 +1,155 @@
+{
+  "_id": {
+    "$oid": "644a1f89ea86319a60c15641"
+  },
+  "mainboard_csn": "WE01245000ZNSB",
+  "RESULT_AREA_A1": 14.0,
+  "RESULT_AREA_A2": 13.0,
+  "RESULT_AREA_B1": 7.0,
+  "RESULT_AREA_B2": 15.0,
+  "TIME_AREA_A": 47.155,
+  "TIME_CALIBRATION": 8.466,
+  "TIME_PRESS": 31.015,
+  "comment": "取放dimm有誤請查看RESULT_AREA, 取放dimm有誤請查看RESULT_AREA",
+  "dimmfeeder_A": [
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE01221903079BA7(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307CD64(P)M321R8GA0BB0-CQKMG(M)305JL50",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE012219030799CF(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307A39B(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE01221903079720(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307A3A3(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE012219030797D0(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307977A(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307A485(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307990A(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307A2A8(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE01221903079780(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE012219030797F7(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307A3E3(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE012219030798BC(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307A3D4(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    }
+  ],
+  "dimmfeeder_B": [
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307A487(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE01221903079810(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307A462(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE012219030797E6(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307B634(P)M321R8GA0BB0-CQKMG(M)305JL50",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307C41B(P)M321R8GA0BB0-CQKMG(M)305JL50",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE01221903079824(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE01221903079827(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE01221903079859(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307A3CD(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE01221903079840(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE01221903079BBF(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307A2AF(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307976A(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE01221903079B87(P)M321R8GA0BB0-CQKMG(M)30CSLC0",
+      "status": true
+    },
+    {
+      "code": "(L)64GB 2Rx4 PC5-4800B-RA0-1010-XT(S)80CE0122190307D17F(P)M321R8GA0BB0-CQKMG(M)305JL50",
+      "status": true
+    }
+  ],
+  "end_time": {
+    "$date": "2023-04-27T07:47:32.680Z"
+  },
+  "mainboard_usn": "BZA04N0100142500001NSB",
+  "start_time": {
+    "$date": "2023-04-27T07:43:50.798Z"
+  },
+  "status": "FAIL",
+  "TIME_AREA_B": 54.14
+}

@@ -7,16 +7,13 @@ type timeType = {
 
 export const getEvent = async () => {
   const url = new URL(FETCH_EVENT_URL);
-  url.searchParams.append('activation', 'true');
+  url.searchParams.append('activation', 'false');
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
     const data = await response.json();
-    if (!Array.isArray(data) || data.length === 0) {
-      throw new Error('No data found');
-    }
     return data;
   } catch (err) {
     throw new Error('Failed to fetch data');
@@ -26,20 +23,14 @@ export const getEvent = async () => {
 export const getEventByTime = async (time: timeType) => {
   try {
     const url = new URL(FETCH_EVENT_URL);
-    url.searchParams.append('activation', 'true');
+    url.searchParams.append('activation', 'false');
     url.searchParams.append('gte', time.gte.toString());
     url.searchParams.append('lte', time.lte.toString());
     const response = await fetch(url);
-    // const response = await fetch(
-    //   `${FETCH_EVENT_URL}?activation=true&gte=${time.gte}&lte=${time.lte}`,
-    // );
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
     const data = await response.json();
-    if (!Array.isArray(data) || data.length === 0) {
-      throw new Error('No data found');
-    }
     return data;
   } catch (err) {
     throw new Error('Failed to fetch data');

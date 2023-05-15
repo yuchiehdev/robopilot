@@ -1,0 +1,30 @@
+[
+  {
+    "_id": {
+      "$oid": "64128235fdefc19af4d1ced8"
+    },
+    "timestamp": {
+      "$date": "2023-03-16T02:43:01.155Z"
+    },
+    "username": "test",
+    "permission": "admin",
+    "method": "GET",
+    "url": "/api/v1/permissions",
+    "request": "{username:10910634, group:Test-Tray-G1}",
+    "response": "[{ _id : { $oid :  6423db77747e83d0ce8a1638 },  GroupName :  Tray_Hero ,  AccessLevel :  Site Vender ,  Description :  A strong and diverse team that values teamwork, inclusivity, and commitment to excellence! ,  teams_url :  https://wts.wiwynn.com/cltcms/play-index-home.do }, { _id : { $oid :  642fac6810b0e47a6eca6b16 },  GroupName :  Engineer ,  AccessLevel :  Engineer ,  Description :  engineer group for testing ,  teams_url :  https://wts.wiwynn.com/cltcms/play-index-home.do }]"
+  },
+  {
+    "_id": {
+      "$oid": "64128235fdefc19af4d1ced9"
+    },
+    "timestamp": {
+      "$date": "2023-03-16T02:43:01.155Z"
+    },
+    "username": "test",
+    "permission": "admin",
+    "method": "POST",
+    "url": "/api/v1/permissions",
+    "request": "{username:10910634, group:Test-Tray-G1}",
+    "response": "[{ _id : { $oid :  6423db77747e83d0ce8a1638 },  GroupName :  Tray_Hero ,  AccessLevel :  Site Vender ,  Description :  A strong and diverse team that values teamwork, inclusivity, and commitment to excellence! ,  teams_url :  https://wts.wiwynn.com/cltcms/play-index-home.do }, { _id : { $oid :  642fac6810b0e47a6eca6b16 },  GroupName :  Engineer ,  AccessLevel :  Engineer ,  Description :  engineer group for testing ,  teams_url :  https://wts.wiwynn.com/cltcms/play-index-home.do }]"
+  }
+]

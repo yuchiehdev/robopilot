@@ -1,36 +1,29 @@
 /* eslint-disable no-restricted-syntax */
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
-import dayjs from 'dayjs';
-
 import {
   FETCH_DEVICE_URL,
-  FETCH_DEVICE_STATUS_URL,
   DEVICE_SETTING_URL,
   DELETE_DEVICE_URL,
 } from '../data/fetchUrl';
 import quickSort from '../utils/quickSort';
-import type { DeviceTypes, DeviceStatusTypes } from '../types';
+import type { DeviceType, DeviceStatusType } from '../types';
 
-export type SortBy =
-  | 'name'
-  | 'type'
-  | 'status'
-  | 'connector'
-  | 'receiverIp'
-  | 'receiverPort'
-  | 'controllerIp'
-  | 'controllerPort';
+type FilterTagType = {
+  perato: string;
+  dashboardTable: string;
+};
 
 type InitialDeviceState = {
-  device: DeviceTypes[];
-  status: DeviceStatusTypes[];
-  displayDevice: DeviceTypes[];
+  device: DeviceType[];
+  status: DeviceStatusType[];
+  displayDevice: DeviceType[];
   fetchTime: string;
   sortStatus: {
     isSorted: boolean;
     orderBy: string;
     isDesc: boolean;
   };
+  filterTag: FilterTagType;
   page: number;
   viewRows: number;
   setting?: {
@@ -65,6 +58,10 @@ export const initialDeviceState: InitialDeviceState = {
   status: [],
   displayDevice: [],
   fetchTime: '',
+  filterTag: {
+    perato: '',
+    dashboardTable: '',
+  },
   sortStatus: {
     isSorted: false,
     orderBy: '',
@@ -73,35 +70,6 @@ export const initialDeviceState: InitialDeviceState = {
   page: 1,
   viewRows: 10,
 };
-
-// Action: GET event data
-export const fetchDeviceData = createAsyncThunk(
-  'device/getDeviceData',
-  async (_, thunkAPI) => {
-    try {
-      const response = await fetch(`${FETCH_DEVICE_URL}`);
-      const data = await response.json();
-      return data;
-    } catch (err: unknown) {
-      return thunkAPI.rejectWithValue(err);
-    }
-  },
-);
-
-// Action: GET statue data
-export const fetchDeviceStatusData = createAsyncThunk(
-  'device/getDeviceStatusData',
-  async (_, thunkAPI) => {
-    try {
-      const response = await fetch(`${FETCH_DEVICE_STATUS_URL}`);
-      const data = await response.json();
-      return data;
-    } catch (err: unknown) {
-      return thunkAPI.rejectWithValue(err);
-    }
-  },
-);
-
 // Action: GET setting data for add device
 export const fetchDeviceSetting = createAsyncThunk(
   'device/getDeviceSetting',
@@ -125,6 +93,7 @@ export const postAddDevice = createAsyncThunk(
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          token: localStorage.getItem('JWToken') || '',
         },
         body: JSON.stringify(input),
       });
@@ -143,6 +112,10 @@ export const deleteDevice = createAsyncThunk(
     try {
       const response = await fetch(`${DELETE_DEVICE_URL}${input}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem('JWToken') || '',
+        },
       });
       const data = await response.json();
       return data;
@@ -152,7 +125,7 @@ export const deleteDevice = createAsyncThunk(
   },
 );
 
-// Action: UPDATE(PUT) device
+// Action: UPDATE (PUT) device
 export const updateDevice = createAsyncThunk(
   'device/updateDevice',
   async (input: any, thunkAPI) => {
@@ -161,6 +134,7 @@ export const updateDevice = createAsyncThunk(
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          token: localStorage.getItem('JWToken') || '',
         },
         body: JSON.stringify(input),
       });
@@ -176,41 +150,30 @@ const deviceSlice = createSlice({
   name: 'device',
   initialState: initialDeviceState,
   reducers: {
-    sortDevice: (state, action: PayloadAction<SortBy>) => {
+    setDevice: (state, action: PayloadAction<DeviceType[]>) => {
+      state.displayDevice = action.payload;
+    },
+
+    setStatus: (state, action: PayloadAction<DeviceStatusType[]>) => {
+      state.status = action.payload;
+    },
+
+    filterTag: (state, action: PayloadAction<FilterTagType>) => {
+      state.filterTag = action.payload;
+    },
+
+    sortDevice: (state, action: PayloadAction<string>) => {
       const sortBy = action.payload;
-
-      state.device = state.device.map((item) => {
-        const status = state.status.find((statusItem) => statusItem.device === item.name);
-        return { ...item, status: status?.status };
-      });
-
       if (state.sortStatus.orderBy === sortBy) {
         const { isDesc } = state.sortStatus;
-        state.displayDevice = quickSort(state.device, sortBy, !isDesc);
+        state.displayDevice = quickSort(state.displayDevice, sortBy, !isDesc);
         state.sortStatus.isDesc = !isDesc;
       } else {
-        state.displayDevice = quickSort(state.device, sortBy);
+        state.displayDevice = quickSort(state.displayDevice, sortBy);
         state.sortStatus.orderBy = sortBy;
         state.sortStatus.isSorted = true;
         state.sortStatus.isDesc = true;
       }
-    },
-
-    filterDevice: (state, action: PayloadAction<string>) => {
-      const filter = action.payload.trim();
-      const filteredDevice = state.device.filter((item) => {
-        return (
-          item.name.toLowerCase().includes(filter.toLowerCase()) ||
-          item.status?.includes(filter.toLowerCase()) ||
-          item.type.toString().includes(filter.toLowerCase()) ||
-          item.connector.toString().includes(filter.toLowerCase()) ||
-          item.receiver.ip.toString().includes(filter.toLowerCase()) ||
-          item.receiver.port.toString().includes(filter.toLowerCase()) ||
-          item.controller?.ip.toString().includes(filter.toLowerCase()) ||
-          item.controller?.port.toString().includes(filter.toLowerCase())
-        );
-      });
-      state.displayDevice = filteredDevice;
     },
 
     changePage: (state, action: PayloadAction<number>) => {
@@ -224,70 +187,6 @@ const deviceSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(
-        fetchDeviceData.fulfilled,
-        (state, action: PayloadAction<DeviceTypes[]>) => {
-          state.device = action.payload.map((d) => {
-            return {
-              ...d,
-              receiverIp: d.receiver.ip.replaceAll('.', ''),
-              receiverPort: d.receiver.port,
-              controllerIp: d.controller?.ip.replaceAll('.', '') || null,
-              controllerPort: d.controller?.port || null,
-            };
-          });
-
-          if (!state.sortStatus.isSorted) {
-            state.displayDevice = state.device;
-          } else {
-            const sortBy = state.sortStatus.orderBy;
-            const { isDesc } = state.sortStatus;
-
-            state.device = state.device.map((item) => {
-              const status = state.status.find(
-                (statusItem) => statusItem.device === item.name,
-              );
-              return { ...item, status: status?.status };
-            });
-
-            state.displayDevice = quickSort(state.device, sortBy, isDesc);
-            state.sortStatus.isDesc = isDesc;
-          }
-          state.fetchTime = dayjs().format('YYYY/MM/DD HH:mm:ss');
-        },
-      )
-
-      .addCase(fetchDeviceData.rejected, (state) => {
-        state.fetchTime = dayjs().format('YYYY/MM/DD HH:mm:ss');
-      })
-
-      .addCase(
-        fetchDeviceStatusData.fulfilled,
-        (state, action: PayloadAction<DeviceStatusTypes[]>) => {
-          state.status = action.payload;
-        },
-      )
-
-      .addCase(fetchDeviceSetting.fulfilled, (state, action: PayloadAction<any>) => {
-        const connectors = Object.keys(action.payload.conn_table);
-        const controllers: string[] = [];
-        const sensors: string[] = [];
-
-        for (const item of connectors) {
-          if (action.payload.conn_table[item].type === 'controller') {
-            controllers.push(item);
-          } else if (action.payload.conn_table[item].type === 'sensor') {
-            sensors.push(item);
-          }
-        }
-        state.setting = {
-          controller: controllers,
-          sensor: sensors,
-          action_mapping_table: action.payload.action_mapping_table,
-          conn_table: action.payload.conn_table,
-        };
-      })
-
       .addCase(postAddDevice.fulfilled, (state, action: PayloadAction<any>) => {
         state.device = action.payload.device.map((d: any) => {
           return {
@@ -301,7 +200,7 @@ const deviceSlice = createSlice({
         state.displayDevice = state.device;
       })
 
-      .addCase(postAddDevice.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(postAddDevice.rejected, (_, action: PayloadAction<any>) => {
         console.log(action.payload);
       })
 
@@ -318,7 +217,7 @@ const deviceSlice = createSlice({
         state.displayDevice = state.device;
       })
 
-      .addCase(updateDevice.fulfilled, (state, action: PayloadAction<any>) => {
+      .addCase(updateDevice.fulfilled, (_, action: PayloadAction<any>) => {
         console.log(action.payload);
       });
   },

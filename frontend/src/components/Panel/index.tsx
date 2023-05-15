@@ -1,4 +1,5 @@
 import React from 'react';
+import './Panel.scss';
 
 type PanelProps = {
   children: React.ReactNode;

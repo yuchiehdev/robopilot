@@ -5,31 +5,11 @@ import {
   FETCH_CONTROLLER_KV8000_A_URL,
   FETCH_CONTROLLER_KV8000_B_URL,
   ACTION_CONTROL,
-  POST_CONTROLLER_BUTTON,
-  POST_CHECKED_CONTROLLER_ALERT,
 } from '../data/fetchUrl';
 import type { KV8000Type, TS5000Type } from '../types';
 
 type StatusType = {
   [key: string]: string;
-};
-
-// status value and corresponding text
-const TS5000_STATUS: StatusType = {
-  0: 'Disconnected',
-  1: 'Ready',
-  2: 'Running',
-  3: 'Finish and pass',
-  4: 'FINISH and error',
-  99: 'Fail',
-};
-
-const DIMM_STATUS: StatusType = {
-  0: 'Not Ready',
-  1: 'Ready',
-  2: 'Running',
-  3: 'Complete',
-  99: 'Fail',
 };
 
 type InitialControllerState = {
@@ -54,6 +34,24 @@ type InitialControllerState = {
   fetchTime: string;
   startBtnIsClicked: boolean | undefined;
   btnReturnedMessage: string;
+};
+
+// status value and corresponding text
+const TS5000_STATUS: StatusType = {
+  0: 'Disconnected',
+  1: 'Ready',
+  2: 'Running',
+  3: 'Finish and pass',
+  4: 'FINISH and error',
+  99: 'Fail',
+};
+
+const DIMM_STATUS: StatusType = {
+  0: 'Not Ready',
+  1: 'Ready',
+  2: 'Running',
+  3: 'Complete',
+  99: 'Fail',
 };
 
 export const initialControllerState: InitialControllerState = {
@@ -119,52 +117,6 @@ export const fetchControllerData = createAsyncThunk(
   },
 );
 
-// Action: POST Controller start button
-export const postControllerStart = createAsyncThunk(
-  'controller/postControllerStart',
-  async (action: 'ON' | 'OFF', thunkAPI) => {
-    try {
-      const response = await fetch(`${POST_CONTROLLER_BUTTON}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ts5000: 'device_ts5000',
-          kv8000: 'device_kv8000_A',
-          action,
-        }),
-      });
-      const data = await response.json();
-      return data;
-    } catch (err: unknown) {
-      return thunkAPI.rejectWithValue(err);
-    }
-  },
-);
-
-// Action: POST Checked controller alert
-export const postCheckedControllerAlert = createAsyncThunk(
-  'controller/postCheckedControllerAlert',
-  async (input: string, thunkAPI) => {
-    try {
-      const response = await fetch(`${POST_CHECKED_CONTROLLER_ALERT}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: input,
-        }),
-      });
-      const data = await response.json();
-      return data;
-    } catch (err: unknown) {
-      return thunkAPI.rejectWithValue(err);
-    }
-  },
-);
-
 export const fetchControllerKV8000A = createAsyncThunk(
   'controller/getControllerKV8000A',
   async (_, thunkAPI) => {
@@ -207,12 +159,6 @@ const controllerSlice = createSlice({
       } else {
         state.startBtnIsClicked = false;
       }
-    });
-    builder.addCase(postControllerStart.fulfilled, (state, action) => {
-      state.btnReturnedMessage = action.payload.message;
-    });
-    builder.addCase(postCheckedControllerAlert.fulfilled, (state, action) => {
-      console.log(action.payload);
     });
   },
 });

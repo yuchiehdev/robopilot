@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { FETCH_SENSOR_URL } from '../data/fetchUrl';
+import { RESOURCE } from '../data/fetchUrl';
 import type { Sensor } from '../types';
 
 type InitialSensor = {
@@ -14,7 +14,7 @@ export const fetchSensorData = createAsyncThunk(
   'sensor/fetchSensorData',
   async (_, thunkAPI) => {
     try {
-      const response = await fetch(FETCH_SENSOR_URL);
+      const response = await fetch(RESOURCE);
       const data = await response.json();
       return data as Sensor[];
     } catch (error: unknown) {

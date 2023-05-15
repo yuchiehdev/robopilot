@@ -1,25 +1,31 @@
-import { memo, useState, useCallback, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+/* eslint-disable camelcase */
+import React, { memo, useState, useMemo, useEffect, useRef } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import BeatLoader from 'react-spinners/BeatLoader';
 import dayjs from 'dayjs';
-import 'react-toastify/dist/ReactToastify.css';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
+import AUTHORIZATION from '../../data/authorization';
+import dateToUTCTimestamp from '../../utils/dateToUTCTimestamp';
+import IconText from '../../components/IconText';
 import Modal from '../../layout/Modal';
-import Selector from '../../components/Selector';
-import SearchBar from '../../components/SearchBar';
-import EverythingFine from '../../components/IconText';
 import Paginator from '../../layout/Paginator';
+import Selector from '../../components/Selector';
+import TableHeader from '../../components/Table/TableHeader';
+import TagInput from '../../components/TagInput';
+import UpdateAt from '../../components/UpdateAt';
 import useModal from '../../hooks/useModal';
 import usePagination from '../../hooks/usePagination';
+import useSpinnerTimer from '../../hooks/useSpinnerTimer';
+import { getAlarm } from '../../api/alarm';
 import { useAppSelector, useAppDispatch } from '../../store';
-import { alarmActions, fixAlarm, fetchAlarmData } from '../../store/alarmSlice';
-import { maintenanceActions } from '../../store/maintenanceSlice';
-import { ReactComponent as ArrowIcon } from '../../assets/icons/arrow-up.svg';
+import { alarmAction, fixAlarm } from '../../store/alarmSlice';
 import { ReactComponent as ToggleIcon } from '../../assets/icons/chevron-right.svg';
 import { ReactComponent as WrenchIcon } from '../../assets/icons/wrench.svg';
-import { ReactComponent as RecordIcon } from '../../assets/icons/write-record.svg';
-import type { SortBy } from '../../store/alarmSlice';
+import type { AlarmType, TagObjType } from '../../types';
+import { override } from '../../data/constant';
 
+type PermissionType = 'Guest' | 'Engineer' | 'Site Vender' | 'Developer';
 type TableHeaderItem = {
   name: string;
   sortBy: string;
@@ -32,6 +38,8 @@ type fixItemType = {
   errorCode: number;
 };
 
+const refetchInterval = 1000;
+
 const tableCeil: TableHeaderItem[] = [
   { name: 'Time', sortBy: 'time' },
   { name: 'Name', sortBy: 'name' },
@@ -40,24 +48,89 @@ const tableCeil: TableHeaderItem[] = [
   { name: 'Function', sortBy: 'function' },
 ];
 
+const dropdownItems: TableHeaderItem[] = [
+  ...tableCeil,
+  { name: 'Search All', sortBy: 'searchAll' },
+];
+
+const getIconColor = (theme: string, pending: boolean, permission: PermissionType) => {
+  if (!AUTHORIZATION.Device.update.has(permission) || pending) return '#a8aaae';
+  return theme === 'light' ? 'rgb(0, 108, 146)' : 'rgb(142,211,0)';
+};
+
+const filterTagInputResult = (
+  tags: { category: string; input: string }[],
+  fetchData: any,
+) => {
+  dayjs.extend(customParseFormat);
+  let result = fetchData;
+  return tags.map((tagObj: { category: string; input: string }) => {
+    let tagStr = 0;
+    let tagEnd = 0;
+    if (tagObj.category === 'Time') {
+      tagStr = dateToUTCTimestamp(
+        new Date(tagObj.input.split(' ')[0]),
+        `${tagObj.input.split(' ')[1]} ${tagObj.input.split(' ')[2]}`,
+      );
+      tagEnd = dateToUTCTimestamp(
+        new Date(tagObj.input.split(' ')[4]),
+        `${tagObj.input.split(' ')[5]} ${tagObj.input.split(' ')[6]}`,
+      );
+    }
+    result = result.filter((item: any) => {
+      switch (tagObj.category) {
+        case 'id':
+          return item.id.toString().includes(tagObj.input.trim().toLowerCase());
+        case 'Search All':
+          return (
+            item.name.toLowerCase().includes(tagObj.input.trim().toLowerCase()) ||
+            item.severity.includes(tagObj.input.trim().toLowerCase()) ||
+            item.errorCode.toString().includes(tagObj.input.trim().toLowerCase()) ||
+            item.activation.toString().includes(tagObj.input.trim().toLowerCase()) ||
+            dayjs(item.time)
+              .format('YYYY/MM/DD HH:mm:ss')
+              .includes(tagObj.input.trim().toLowerCase()) ||
+            dayjs(item.deactivatedTime)
+              .format('YYYY/MM/DD HH:mm:ss')
+              .includes(tagObj.input.trim().toLowerCase())
+          );
+        case 'Name':
+          return item.name.toLowerCase().includes(tagObj.input.trim().toLowerCase());
+        case 'Time':
+          return (
+            Math.round(dayjs(new Date(item.time)).valueOf() / 1000) >= tagStr &&
+            Math.round(dayjs(new Date(item.time)).valueOf() / 1000) <= tagEnd
+          );
+        case 'Severity':
+          return item.severity.includes(tagObj.input.trim().toLowerCase());
+        case 'Error Code':
+          return item.errorCode.toString() === tagObj.input.trim().toLowerCase();
+        case 'Function':
+          return item.function.toLowerCase().includes(tagObj.input.trim().toLowerCase());
+        case 'Activation':
+          return item.activation.toString().includes(tagObj.input.trim().toLowerCase());
+        default:
+          return item;
+      }
+    });
+    return result;
+  });
+};
+
 const Alarm = () => {
-  const fetchDataInterval = useRef<NodeJS.Timeout>();
-  // const [openModel, setOpenModel] = useState(true);
-  const [searchInput, setSearchInput] = useState<string>('');
+  const dispatch = useAppDispatch();
+  const [displayData, setDisplayData] = useState<AlarmType[]>([]);
+  const [tagObjs, setTagObjs] = useState<TagObjType[]>([]);
   const [fixItem, setFixItem] = useState<fixItemType | null>(null);
   const [clickFixAlarm, setClickFixAlarm] = useState<boolean>(false);
   const { isOpen, toggleModal } = useModal();
-  const isSignIn = useAppSelector((state) => state.user.isSignIn);
-  const theme = useAppSelector((state) => state.user.theme);
-  const sortStatus = useAppSelector((state) => state.alarm.sortStatus);
-  const viewRows = useAppSelector((state) => state.alarm.viewRows);
-  const alarmCount = useAppSelector((state) => state.alarm.alarmCount);
-  const fixResult = useAppSelector((state) => state.alarm.fixAlarm);
+  const ref = useRef<HTMLInputElement>(null);
+  const alarm = useAppSelector((state) => state.alarm.alarm);
   const displayAlarm = useAppSelector((state) => state.alarm.displayAlarm);
-  const fetchTime = useAppSelector((state) => state.alarm.fetchTime);
-  const displayErrorMsg = useAppSelector((state) => state.alarm.displayErrorMsg);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const permission = useAppSelector((state) => state.user.permission);
+  const theme = useAppSelector((state) => state.user.theme);
+  const viewRows = useAppSelector((state) => state.alarm.viewRows);
+  const { showSpinner, setShowSpinner } = useSpinnerTimer(1.3);
 
   const {
     goPrev,
@@ -66,141 +139,122 @@ const Alarm = () => {
     currentData: currentPageData,
     currentPage,
     maxPage,
-  } = usePagination(displayAlarm, viewRows);
+  } = usePagination(displayData || [], viewRows);
 
-  const showErrorMsgHandler = useCallback(
-    (id: string) => {
-      dispatch(alarmActions.showErrorMsg(id));
+  const { data, isLoading } = useQuery<AlarmType[], Error>({
+    queryKey: ['alarms'],
+    queryFn: getAlarm,
+    refetchInterval,
+    onError: (err) => {
+      throw err;
     },
-    [dispatch],
-  );
+    suspense: true,
+  });
 
-  const sortHandler = useCallback(
-    (name: SortBy) => {
-      dispatch(alarmActions.sortAlarm(name));
-    },
-    [dispatch],
-  );
+  const formattedData = useMemo(() => {
+    if (data) {
+      return data.map((item: AlarmType) => {
+        const {
+          _id: { $oid },
+          timestamp: { $date },
+          name,
+          severity,
+          error_code,
+        } = item;
+        return {
+          ...item,
+          id: $oid,
+          time: dayjs($date).format('YYYY-MM-DD HH:mm:ss'),
+          name,
+          severity,
+          errorCode: error_code,
+          showMsg: false,
+        };
+      });
+    }
+    return [];
+  }, [data]);
 
-  const changeViewRowsHandler = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
-      dispatch(alarmActions.changeViewRows(Number(e.target.value)));
-    },
-    [dispatch],
-  );
+  const sortHandler = (name: string) => {
+    dispatch(alarmAction.sortAlarm(name));
+  };
 
-  const filterEventHandler = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      e.preventDefault();
-      setSearchInput(e.target.value);
-      dispatch(alarmActions.filterAlarm(e.target.value));
-    },
-    [dispatch],
-  );
+  const showErrorMsgHandler = (id: string) => {
+    dispatch(alarmAction.showErrorMsg(id));
+  };
+
+  const changeViewRowsHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(alarmAction.changeViewRows(Number(e.target.value)));
+  };
 
   const fixAlarmHandler = (id: string, device: string, errorCode: number) => {
     dispatch(fixAlarm({ id, device, errorCode }));
-    dispatch(fetchAlarmData());
     setClickFixAlarm(true);
-    setSearchInput('');
+    setShowSpinner(true);
     setFixItem(null);
+
+    setTimeout(() => {
+      setClickFixAlarm(false);
+    }, 1300);
   };
 
-  const navigateToMaintenance = useCallback(
-    (name: string) => {
-      dispatch(maintenanceActions.setFilterKeyword(name));
-      navigate('/maintenance');
-    },
-    [dispatch, navigate],
-  );
-
-  const clearSearchInputHandler = useCallback(() => {
-    setSearchInput('');
-    dispatch(fetchAlarmData());
-  }, [dispatch]);
+  useEffect(() => {
+    dispatch(alarmAction.setAlarms(formattedData));
+  }, [dispatch, formattedData]);
 
   useEffect(() => {
-    if (searchInput === '' && !displayErrorMsg.length) {
-      fetchDataInterval.current = setInterval(() => {
-        dispatch(fetchAlarmData());
-      }, 1000);
+    if (tagObjs.length === 0) {
+      const turnIntoArray = (items: AlarmType[]) => [...items];
+      setDisplayData(turnIntoArray(displayAlarm));
+    } else {
+      setDisplayData(
+        filterTagInputResult(tagObjs, displayAlarm)[
+          filterTagInputResult(tagObjs, displayAlarm).length - 1
+        ],
+      );
     }
-
-    return () => {
-      clearInterval(fetchDataInterval.current);
-    };
-  }, [searchInput, displayErrorMsg.length, dispatch]);
+  }, [tagObjs, displayAlarm]);
 
   useEffect(() => {
-    if (searchInput) {
-      clearInterval(fetchDataInterval.current);
-    }
-  }, [searchInput]);
-
-  useEffect(() => {
-    if (clickFixAlarm && fixResult.status !== undefined) {
-      toast(fixResult.message, {
-        autoClose: 1000,
-        type: fixResult.status === 200 ? 'success' : 'error',
+    const turnIntoArray = (items: AlarmType[]) => {
+      return items.map((item: any) => {
+        return item;
       });
-      setTimeout(() => {
-        dispatch(fetchAlarmData());
-      }, 1000);
-
-      setTimeout(() => {
-        setClickFixAlarm(false);
-      }, 2000);
-    }
-  }, [clickFixAlarm, fixResult.message, fixResult.status, dispatch]);
+    };
+    setDisplayData(turnIntoArray(alarm));
+  }, [dispatch, alarm]);
 
   return (
-    <main className="relative flex overflow-scroll bg-white dark:bg-black">
-      <ToastContainer />
-      <section className="absolute top-3 left-16 mt-2">
-        <strong className="text-lg dark:text-white">Last Updated: </strong>
-        <span className="dark:text-white">{fetchTime}</span>
-      </section>
-      {alarmCount > 0 ? (
-        <div className="flex h-max w-full flex-col">
-          <section className="absolute right-14 top-3 inline-block h-10 w-min">
-            <SearchBar
-              searchInput={searchInput}
-              onChange={filterEventHandler}
-              onClear={clearSearchInputHandler}
-            />
+    <main className="relative flex flex-col overflow-scroll bg-white dark:bg-black">
+      {displayAlarm.length > 0 ? (
+        <section className="f-auto w-full">
+          <section className="mx-auto flex w-11/12 items-center p-2">
+            <section className="flex w-1/3 items-center gap-2">
+              <strong className="text-lg dark:text-white">Last Updated: </strong>
+              <UpdateAt
+                queryKey={['alarm']}
+                queryFn={getAlarm}
+                refetchInterval={refetchInterval}
+              />
+            </section>
+
+            <section className="w-2/3">
+              <TagInput
+                dropdownItems={dropdownItems}
+                tagObjs={tagObjs}
+                setTagObjs={setTagObjs}
+                forwardRef={ref}
+              />
+            </section>
           </section>
-          <table className="mx-auto mb-5 mt-20 w-11/12">
-            <thead>
-              <tr className="bg-gray-80 dark:bg-gray-220">
-                <th>{null}</th>
+
+          <table className="relative mx-auto mb-8 mt-5 w-11/12">
+            <thead className="sticky top-0 z-20">
+              <tr className="border-2 border-table-border bg-table-bg text-table-font">
+                <th className="dark:bg-gray-220 dark:text-light-60">{null}</th>
                 {tableCeil.map((item) => {
                   return (
-                    <th
-                      key={item.name}
-                      className="text-start text-sm leading-10 tracking-wide text-gray-220 dark:bg-gray-220 dark:text-light-60"
-                    >
-                      <button
-                        className="flex items-center"
-                        onClick={() => sortHandler(item.sortBy as SortBy)}
-                        onTouchEnd={() => sortHandler(item.sortBy as SortBy)}
-                      >
-                        <span>{item.name}</span>
-                        <span className="ml-2 inline-block w-3">
-                          <ArrowIcon
-                            className={
-                              sortStatus.orderBy === item.sortBy && !sortStatus.isDesc
-                                ? 'rotate-180'
-                                : ''
-                            }
-                            fill={
-                              sortStatus.orderBy === item.sortBy
-                                ? 'rgb(0,108,146)'
-                                : '#6f6f6f'
-                            }
-                          />
-                        </span>
-                      </button>
-                    </th>
+                    <TableHeader item={item} key={item.name} sortHandler={sortHandler} />
                   );
                 })}
                 <th className="text-start text-sm leading-10 tracking-wide text-gray-220 dark:bg-gray-220 dark:text-light-60">
@@ -209,20 +263,20 @@ const Alarm = () => {
               </tr>
             </thead>
 
-            <tbody>
+            <tbody className="relative z-10">
               {currentPageData.map((item) => {
                 const time = dayjs(new Date(item.timestamp.$date))
                   .format('YYYY/MM/DD HH:mm:ss')
                   .toString();
                 return (
-                  <>
+                  <React.Fragment key={item.id}>
                     <tr
                       key={item.id}
-                      className="event-row border-b border-light-120 text-sm leading-[3rem] dark:border-gray-200 dark:text-light-100"
+                      className="event-row border-2 border-table-border text-sm leading-[3rem] hover:cursor-pointer hover:bg-table-hover dark:border-gray-200 dark:text-light-100 dark:hover:text-black"
                     >
                       <td>
                         <button
-                          className="z-50 rounded-full p-3 hover:bg-gray-80"
+                          className="z-50 rounded-full p-3 hover:bg-blue-exlight"
                           onClick={() => showErrorMsgHandler(item.id)}
                         >
                           <ToggleIcon
@@ -232,57 +286,62 @@ const Alarm = () => {
                         </button>
                       </td>
                       <td>{time}</td>
-                      <td>{item.name}</td>
+                      <td
+                        style={{
+                          width: '30%',
+                          lineHeight: '1.5rem',
+                          paddingRight: '0.5rem',
+                        }}
+                      >
+                        {item.name}
+                      </td>
                       <td>{item.severity}</td>
                       <td>{item.error_code}</td>
-                      <td>{item.function}</td>
+                      <td
+                        style={{
+                          width: '30%',
+                          lineHeight: '1.5rem',
+                          paddingRight: '0.5rem',
+                        }}
+                      >{`${item.function}`}</td>
                       <td>
-                        {item.name === 'maintenance expired' ? (
-                          <button
-                            className="flex w-5 cursor-pointer items-center transition hover:scale-125"
-                            onClick={() => navigateToMaintenance(item.msg[0])}
-                          >
-                            <RecordIcon
-                              fill={
-                                theme === 'light' ? 'rgb(0,108,146)' : 'rgb(142, 211, 0)'
-                              }
-                            />
-                          </button>
-                        ) : (
-                          <button
-                            className="flex w-5 cursor-pointer items-center transition hover:scale-125 disabled:hover:scale-100 disabled:hover:cursor-not-allowed"
-                            disabled={clickFixAlarm || !isSignIn}
-                            key={item.id}
-                            id={item.id}
-                            onClick={() => {
-                              toggleModal();
-                              setFixItem({
-                                id: item.id,
-                                device: item.device,
-                                errorCode: item.errorCode,
-                                name: item.name,
-                              });
-                            }}
-                          >
-                            <WrenchIcon
-                              fill={
-                                clickFixAlarm || !isSignIn
-                                  ? '#979797'
-                                  : 'rgb(142, 211, 0)'
-                              }
-                            />
-                          </button>
-                        )}
+                        <button
+                          className="flex w-5 cursor-pointer items-center transition hover:scale-125 disabled:hover:scale-100 disabled:hover:cursor-not-allowed"
+                          disabled={
+                            clickFixAlarm || !AUTHORIZATION.Alarm.update.has(permission)
+                          }
+                          key={item.id}
+                          id={item.id}
+                          onClick={() => {
+                            toggleModal();
+                            setFixItem({
+                              id: item.id,
+                              device: item.device,
+                              errorCode: item.errorCode,
+                              name: item.name,
+                            });
+                          }}
+                        >
+                          <WrenchIcon
+                            fill={getIconColor(theme, clickFixAlarm, permission)}
+                          />
+                        </button>
                       </td>
                     </tr>
                     {item.showMsg && (
-                      <tr className=" bg-light-120 dark:bg-gray-220 dark:text-gray-60">
+                      <tr className="border-2 border-table-border bg-table-hover dark:bg-gray-220 dark:text-gray-60">
                         {item.showMsg && (
                           <td colSpan={7} className="w-full rounded-b-lg p-4 pl-10">
                             {item.desc && (
                               <p className="text-sm">
                                 <span className="font-semibold">Description: </span>
                                 {item.desc}
+                              </p>
+                            )}
+                            {item.function && (
+                              <p className="text-sm">
+                                <span className="font-semibold">Function: </span>
+                                {item.function}
                               </p>
                             )}
                             {item.solution && (
@@ -309,7 +368,7 @@ const Alarm = () => {
                         )}
                       </tr>
                     )}
-                  </>
+                  </React.Fragment>
                 );
               })}
             </tbody>
@@ -335,6 +394,19 @@ const Alarm = () => {
               rows per page
             </section>
           </section>
+
+          {showSpinner && (
+            <div className="absolute top-0 left-0 h-full w-full bg-[rgba(0,0,0,0.7)]">
+              <BeatLoader
+                size={50}
+                color="rgb(142,211,0)"
+                loading
+                cssOverride={override}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            </div>
+          )}
 
           <Modal
             isOpen={isOpen}
@@ -375,9 +447,9 @@ const Alarm = () => {
               </section>
             </>
           </Modal>
-        </div>
+        </section>
       ) : (
-        <EverythingFine text="No Alarm" width=" w-32" />
+        !isLoading && <IconText text="No Alarm Report" width=" w-32" />
       )}
     </main>
   );

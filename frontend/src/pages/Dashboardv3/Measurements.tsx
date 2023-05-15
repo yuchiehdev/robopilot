@@ -8,7 +8,7 @@ import mockMeasureData from '../../data/mockMeasurementsTable.json';
 import deviation, { mean } from '../../utils/standardDeviation';
 import mockControlData from '../../data/mockControlData.json';
 import { useAppDispatch } from '../../store';
-import { eventActions } from '../../store/eventQuerySlice';
+import { eventActions } from '../../store/eventSlice';
 import { ReactComponent as LoadCheckIcon } from '../../assets/icons/loadCheck.svg';
 import NoData from '../../components/IconText';
 

@@ -1,15 +1,20 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
-import quickSort from '../utils/quickSort';
-import { FETCH_MAINTENANCE, FIX_ALARM, PREFIX_MAINTENANCE } from '../data/fetchUrl';
-import type { MaintenanceType } from '../types';
 
-export type SortBy = 'inspectionPoint' | 'cycle' | 'lastCheck';
+import quickSort from '../utils/quickSort';
+import {
+  FIX_ALARM,
+  PREFIX_MAINTENANCE,
+  FETCH_ACTIVE_MAINTENANCE_URL,
+} from '../data/fetchUrl';
+import type { MaintenanceType } from '../types';
 
 type InitialMaintenanceState = {
   maintenance: MaintenanceType[];
   maintenanceCount: number;
+  activeMaintenanceCount: number;
   displayMaintenance: MaintenanceType[];
+  displayDescription: string[];
   sortStatus: {
     isSorted: boolean;
     orderBy: string;
@@ -29,7 +34,9 @@ type InitialMaintenanceState = {
 export const initialMaintenanceState: InitialMaintenanceState = {
   maintenance: [],
   maintenanceCount: 0,
+  activeMaintenanceCount: 0,
   displayMaintenance: [],
+  displayDescription: [],
   sortStatus: {
     isSorted: false,
     orderBy: '',
@@ -46,20 +53,6 @@ export const initialMaintenanceState: InitialMaintenanceState = {
   fetchTime: '',
 };
 
-// Action: fetch Maintenance data
-export const fetchMaintenanceData = createAsyncThunk(
-  'maintenance/getMaintenanceData',
-  async (_, thunkAPI) => {
-    try {
-      const response = await fetch(`${FETCH_MAINTENANCE}`);
-      const data = await response.json();
-      return data;
-    } catch (err: unknown) {
-      return thunkAPI.rejectWithValue(err);
-    }
-  },
-);
-
 // Action: check active maintenance
 export const checkActiveItem = createAsyncThunk(
   'maintenance/checkActiveItem',
@@ -70,6 +63,7 @@ export const checkActiveItem = createAsyncThunk(
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          token: localStorage.getItem('JWToken') || '',
         },
         body: JSON.stringify({
           err_code: 1000,
@@ -98,6 +92,7 @@ export const checkInactiveItem = createAsyncThunk(
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          token: localStorage.getItem('JWToken') || '',
         },
       });
       const data = await response.json();
@@ -112,16 +107,28 @@ const maintenanceSlice = createSlice({
   name: 'maintenance',
   initialState: initialMaintenanceState,
   reducers: {
+    setMaintenances: (state, action: PayloadAction<MaintenanceType[]>) => {
+      state.displayMaintenance = action.payload.sort((a, b) => b.isActive - a.isActive);
+    },
+
     showDescription: (state, action: PayloadAction<string>) => {
-      const targetMaintenance = state.maintenance.find(
-        (item) => item.id === action.payload,
+      const targetMaintenance = state.displayMaintenance.find(
+        (maintenance) => maintenance.id === action.payload,
       );
       if (targetMaintenance) {
         targetMaintenance.showDescription = !targetMaintenance.showDescription;
       }
+
+      if (state.displayDescription.includes(action.payload)) {
+        state.displayDescription = state.displayDescription.filter(
+          (msg) => msg !== action.payload,
+        );
+      } else {
+        state.displayDescription.push(action.payload);
+      }
     },
 
-    sortData: (state, action: PayloadAction<SortBy>) => {
+    sortData: (state, action: PayloadAction<string>) => {
       const sortBy = action.payload;
       if (state.sortStatus.orderBy === sortBy) {
         const { isDesc } = state.sortStatus;
@@ -139,8 +146,8 @@ const maintenanceSlice = createSlice({
       const filter = action.payload.trim();
       const filteredData = state.maintenance.filter((item) => {
         return (
-          item.InspectionPoint.toLowerCase().includes(filter.toLowerCase()) ||
-          item.Cycle.toString().includes(filter.toLowerCase()) ||
+          item.Item.toLowerCase().includes(filter.toLowerCase()) ||
+          item.Duration.toString().includes(filter.toLowerCase()) ||
           item.Description.toString().includes(filter.toLowerCase()) ||
           dayjs(item.timeStamp).format('YYYY/MM/DD HH:mm:ss').includes(filter)
         );
@@ -152,8 +159,7 @@ const maintenanceSlice = createSlice({
       const filter = action.payload.trim();
       const filteredData = state.maintenance.filter((item) => {
         return (
-          item.InspectionPoint.toLowerCase().includes(filter.toLowerCase()) &&
-          item.active === true
+          item.Item.toLowerCase().includes(filter.toLowerCase()) && item.active === true
         );
       });
       state.displayMaintenance = filteredData;
@@ -177,38 +183,6 @@ const maintenanceSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(
-      fetchMaintenanceData.fulfilled,
-      (state, action: PayloadAction<MaintenanceType[]>) => {
-        const editedData = action.payload.map((item) => {
-          // eslint-disable-next-line no-underscore-dangle
-          const id = item._id.$oid;
-          const isActive: 1 | 0 = item.active ? 1 : 0;
-          const timeStamp = item.LastCheck.$date;
-          const time = dayjs(item.LastCheck.$date).format('YYYY/MM/DD HH:mm:ss');
-          return {
-            ...item,
-            InspectionPoint: item.InspectionPoint.replaceAll('_', ' '),
-            id,
-            time,
-            timeStamp,
-            showDescription: false,
-            isActive,
-          };
-        });
-        state.maintenance = editedData;
-        state.maintenanceCount = editedData.length;
-        state.displayMaintenance = state.maintenance.sort(
-          (a, b) => b.isActive - a.isActive,
-        );
-        state.fetchTime = dayjs().format('YYYY/MM/DD HH:mm');
-      },
-    );
-
-    builder.addCase(fetchMaintenanceData.rejected, (state, action) => {
-      state.fetchTime = dayjs().format('YYYY/MM/DD HH:mm:ss');
-    });
-
     builder.addCase(checkActiveItem.fulfilled, (state, action) => {
       const { data, status, fixedItem } = action.payload;
       state.checkMaintenance.status = status;

@@ -1,0 +1,6 @@
+{
+  "actionControl": false,
+  "device_kv8000_dimmfeeder": false,
+  "device_kv8000_trayfeeder": false,
+  "device_ts5000": true
+}

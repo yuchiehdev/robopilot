@@ -1,64 +1,36 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { SIGN_IN, AUTH } from '../data/fetchUrl';
+import { createSlice } from '@reduxjs/toolkit';
+
+type activeTab = {
+  page: string;
+  tab: string;
+};
 
 type UserState = {
   name: string;
   role: string;
+  permission: 'Guest' | 'Engineer' | 'Site Vender' | 'Developer';
   isSignIn: boolean;
-  errorMsg: string;
   theme: 'light' | 'dark';
   toggleSidebar: boolean;
   showRightSidebar: boolean;
+  activeTab: activeTab[];
 };
 
 export const initialUserState: UserState = {
   name: '',
   role: '',
+  permission: 'Guest',
   isSignIn: false,
-  errorMsg: '',
   theme: 'light',
-  toggleSidebar: false,
+  toggleSidebar: true,
   showRightSidebar: false,
+  activeTab: [
+    {
+      page: 'event',
+      tab: '1',
+    },
+  ],
 };
-
-// Action: sign-in
-export const signIn = createAsyncThunk(
-  'user/signIn',
-  async (
-    input: { data: { username: string; password: string }; mode: string },
-    thunkAPI,
-  ) => {
-    try {
-      const response = await fetch(`${SIGN_IN}${input.mode}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(input.data),
-      });
-      const result = await response.json();
-      return { status: response.status, result };
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err);
-    }
-  },
-);
-
-// Action: auth
-export const auth = createAsyncThunk('user/auth', async (_, thunkAPI) => {
-  try {
-    const response: Response = await fetch(AUTH, {
-      headers: {
-        'Content-Type': 'application/json',
-        token: sessionStorage.getItem('JWToken') || '',
-      },
-    });
-    const result = await response.json();
-    return { status: response.status, result };
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err);
-  }
-});
 
 const userSlice = createSlice({
   name: 'user',
@@ -73,33 +45,39 @@ const userSlice = createSlice({
     toggleRightSidebar: (state) => {
       state.showRightSidebar = !state.showRightSidebar;
     },
+    hideRightSidebar: (state) => {
+      state.showRightSidebar = false;
+    },
+    setUserRole: (state, action) => {
+      state.name = action.payload.name || '';
+      state.permission = action.payload.permission || 'Guest';
+    },
+    setPermission: (state, action) => {
+      state.permission = action.payload;
+    },
+    setUserName: (state, action) => {
+      state.name = action.payload;
+    },
+    setSignInStatus: (state, action) => {
+      state.isSignIn = action.payload;
+    },
     signOut: (state) => {
       state.name = '';
-      state.role = '';
       state.isSignIn = false;
-      state.errorMsg = '';
-      sessionStorage.removeItem('JWToken');
+      state.permission = 'Guest';
+      localStorage.removeItem('JWToken');
+      localStorage.removeItem('RefreshToken');
+      localStorage.removeItem('SessionExpiration');
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(signIn.fulfilled, (state, action) => {
-      if (action.payload.status === 200) {
-        state.name = action.payload.result.name || '';
-        state.role = action.payload.result.title || '';
-        state.isSignIn = true;
-        sessionStorage.setItem('JWToken', action.payload.result.access_token);
+    setActiveTab: (state, action) => {
+      const { page, tab } = action.payload;
+      const index = state.activeTab.findIndex((item) => item.page === page);
+      if (index === -1) {
+        state.activeTab.push({ page, tab });
       } else {
-        state.errorMsg = action.payload.result.message;
+        state.activeTab[index].tab = tab;
       }
-    });
-
-    builder.addCase(auth.fulfilled, (state, action) => {
-      if (action.payload.status === 200) {
-        state.isSignIn = true;
-      } else {
-        state.isSignIn = false;
-      }
-    });
+    },
   },
 });
 

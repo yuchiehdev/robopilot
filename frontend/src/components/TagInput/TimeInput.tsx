@@ -41,7 +41,7 @@ const TimeInput = ({
     setShowEnd(!showEnd);
     setShowStart(false);
   };
-  const { domNode }: any = useClickOutsideSingle(() => {
+  const { domNode } = useClickOutsideSingle<HTMLDivElement>(() => {
     setShowStart(false);
     setShowEnd(false);
   });
@@ -77,7 +77,7 @@ const TimeInput = ({
             <div className="absolute z-50" ref={domNode}>
               <Timekeeper
                 time={startTime}
-                doneButton={(data) => doneButton(data, 0)}
+                doneButton={(data: any) => doneButton(data, 0)}
                 forceCoarseMinutes
               />
             </div>
@@ -98,7 +98,7 @@ const TimeInput = ({
               <Timekeeper
                 time={endTime}
                 forceCoarseMinutes
-                doneButton={(data) => doneButton(data, 1)}
+                doneButton={(data: any) => doneButton(data, 1)}
               />
             </div>
           ) : null}

@@ -1,0 +1,21 @@
+.controller-main {
+  background-image: url(../../assets/controller-image-no-main.jpg);
+  background-size: cover;
+  opacity: 0.5;
+}
+
+.flash {
+  animation: flash 1s infinite;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
